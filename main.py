@@ -103,6 +103,87 @@ menu_invalido = """
 """
 
 
+
+post_produto = """
+====================================
+=== CADASTRANDO DADOS DO PRODUTO ===
+====================================
+"""
+
+get_produto = """
+====================================
+==== EXIBINDO DADOS DO PRODUTO =====
+====================================
+"""
+
+put_produto = """
+====================================
+==== ALTERANDO DADOS DO PRODUTO ====
+====================================
+"""
+
+del_produto = """
+====================================
+==== DELETANDO DADOS DO PRODUTO ====
+====================================
+"""
+
+
+
+
+
+post_cliente = """
+====================================
+=== CADASTRANDO DADOS DO CLIENTE ===
+====================================
+"""
+
+get_cliente = """
+====================================
+==== EXIBINDO DADOS DO CLIENTE =====
+====================================
+"""
+
+put_cliente = """
+====================================
+==== ALTERANDO DADOS DO CLIENTE ====
+====================================
+"""
+
+del_cliente = """
+====================================
+==== DELETANDO DADOS DO CLIENTE ====
+====================================
+"""
+
+
+
+
+
+post_venda = """
+====================================
+=== CADASTRANDO DADOS DA VENDA =====
+====================================
+"""
+
+get_venda = """
+====================================
+===== EXIBINDO DADOS DA VENDA ======
+====================================
+"""
+
+put_venda = """
+====================================
+===== ALTERANDO DADOS DA VENDA =====
+====================================
+"""
+
+del_venda = """
+====================================
+===== DELETANDO DADOS DA VENDA =====
+====================================
+"""
+
 opcao = ""
 while opcao != "0":
     sleep(2)
@@ -113,15 +194,77 @@ while opcao != "0":
 
     if opcao == "1":
         print(menu_produtos)
-    
+        opcao2 = input("DIGITE SUA OPÇÃO: ")
+        if opcao2 == "1":
+            print(post_produto)
+
+        elif opcao2 == "2":
+            print(get_produto)
+
+        elif opcao2 == "3":
+            print(put_produto)
+
+        elif opcao2 == "4":
+            print(del_produto)
+
+        elif opcao == "0":
+            print("de volta ao menu principal")
+
     elif opcao == "2":
         print(menu_clientes)
+        opcao2 = input("DIGITE SUA OPÇÃO: ")
+        if opcao2 == "1":
+            print(post_cliente)
+            nome = input("INFORME O NOME DO CLIENTE: ")
+            cpf = input("INFORME O CPF DO CLIENTE: ")
+            email = input("INFORME O EMAIL DO CLIENTE")
+            sleep(1)
+            print("PROCESSANDO...")
+            sleep(2)
+            print("CLIENTE CADASTRADO COM SUCESSO!")
+        elif opcao2 == "2":
+            print(get_cliente)
+            cpf = input("INFORME O CPF DO CLIENTE: ")
+            sleep(1)
+            print("PROCESSANDO...")
+            sleep(2)
+            print("""
+                  NOME: John Connor
+                  CPF: 400.289.220-00
+                  EMAIL: exterminadordofuturo@gmail.com""")
+
+        elif opcao2 == "3":
+            print(put_cliente)
+
+        elif opcao2 == "4":
+            print(del_cliente)
+
+        elif opcao == "0":
+            print("de volta ao menu principal")
 
     elif opcao == "3":
         print(menu_vendas)
+        opcao2 = input("DIGITE SUA OPÇÃO: ")
+        if opcao2 == "1":
+            print(post_venda)
+
+        elif opcao2 == "2":
+            print(get_venda)
+
+        elif opcao2 == "3":
+            print(put_venda)
+
+        elif opcao2 == "4":
+            print(del_venda)
+
+        elif opcao == "0":
+            print("de volta ao menu principal")
 
     elif opcao == "4":
         print(menu_relatorios)
+        opcao2 = input("DIGITE SUA OPÇÃO: ")
+        print("esse módulo ainda está em desenvolvimento")
+
     
     elif opcao == "5":
         print(menu_infos)
