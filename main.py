@@ -217,7 +217,7 @@ while opcao != "0":
             print(post_cliente)
             nome = input("INFORME O NOME DO CLIENTE: ")
             cpf = input("INFORME O CPF DO CLIENTE: ")
-            email = input("INFORME O EMAIL DO CLIENTE")
+            email = input("INFORME O EMAIL DO CLIENTE: ")
             sleep(1)
             print("PROCESSANDO...")
             sleep(2)
@@ -226,18 +226,30 @@ while opcao != "0":
             print(get_cliente)
             cpf = input("INFORME O CPF DO CLIENTE: ")
             sleep(1)
-            print("PROCESSANDO...")
+            print("PROCURANDO CLIENTE...")
             sleep(2)
-            print("""
+            print(f"""
                   NOME: John Connor
-                  CPF: 400.289.220-00
+                  CPF: {cpf}
                   EMAIL: exterminadordofuturo@gmail.com""")
 
         elif opcao2 == "3":
             print(put_cliente)
+            nome = input("INFORME O NOME DO CLIENTE: ")
+            cpf = input("INFORME O CPF DO CLIENTE: ")
+            email = input("INFORME O EMAIL DO CLIENTE")
+            sleep(1)
+            print("PROCESSANDO ALTERAÇÃO...")
+            sleep(2)
+            print("DADOS DO CLIENTE ALTERADOS COM SUCESSO!")
 
         elif opcao2 == "4":
             print(del_cliente)
+            cpf = input("INFORME O CPF DO CLIENTE: ")
+            sleep(1)
+            print("EXCLUINDO CLIENTE...")
+            sleep(2)
+            print("CLIENTE EXCLUIDO COM SUCESSO!")
 
         elif opcao == "0":
             print("de volta ao menu principal")
