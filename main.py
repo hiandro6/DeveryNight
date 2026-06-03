@@ -184,36 +184,74 @@ del_venda = """
 ====================================
 """
 
-opcao = ""
-while opcao != "0":
+op_princ = ""
+while op_princ != "0":
     sleep(2)
     print(menu_principal)
-    opcao = input("DIGITE SUA OPÇÃO: ")
+    op_princ = input("DIGITE SUA OPÇÃO: ")
     print("CARREGANDO...")
     sleep(1)
 
-    if opcao == "1":
+
+
+
+#produtos:
+    if op_princ == "1":
         print(menu_produtos)
-        opcao2 = input("DIGITE SUA OPÇÃO: ")
-        if opcao2 == "1":
+        op_produto = input("DIGITE SUA OPÇÃO: ")
+        if op_produto == "1":
             print(post_produto)
+            cod_produto = int(input("INFORME O CÓDIGO DO PRODUTO: "))
+            nome = input("INFORME O NOME DO PRODUTO: ")
+            preco = float(input("INFORME O PREÇO DO PRODUTO: "))
+            categoria = input("INFORME A CATEGORIA DO PRODUTO: ")
+            sleep(1)
+            print("PROCESSANDO...")
+            sleep(2)
+            print("PRODUTO CADASTRADO COM SUCESSO!")
 
-        elif opcao2 == "2":
+        elif op_produto == "2":
             print(get_produto)
+            cod_produto = int(input("INFORME O CÓDIGO DO PRODUTO: "))
+            sleep(1)
+            print("PROCURANDO PRODUTO...")
+            sleep(2)
+            print(f"""
+                  CÓDIGO: {cod_produto}
+                  NOME: COCA 0 LATA
+                  PREÇO: 7.00
+                  CATEGORIA: BEBIDAS""")
 
-        elif opcao2 == "3":
+        elif op_produto == "3":
             print(put_produto)
+            cod_produto = int(input("INFORME O CÓDIGO DO PRODUTO: "))
+            nome = input("INFORME O NOME DO PRODUTO: ")
+            preco = float(input("INFORME O PREÇO DO PRODUTO: "))
+            categoria = input("INFORME A CATEGORIA DO PRODUTO: ")
+            sleep(1)
+            print("PROCESSANDO ALTERAÇÃO...")
+            sleep(2)
+            print("DADOS DO PRODUTO ALTERADOS COM SUCESSO!")
 
-        elif opcao2 == "4":
+        elif op_produto == "4":
             print(del_produto)
+            cpf = input("INFORME O CÓDIGO DO PRODUTO: ")
+            sleep(1)
+            print("EXCLUINDO PRODUTO...")
+            sleep(2)
+            print("PRODUTO EXCLUIDO COM SUCESSO!")
 
-        elif opcao == "0":
+        elif op_produto == "0":
             print("de volta ao menu principal")
 
-    elif opcao == "2":
+
+
+
+#clientes:
+    elif op_princ == "2":
         print(menu_clientes)
-        opcao2 = input("DIGITE SUA OPÇÃO: ")
-        if opcao2 == "1":
+        op_cliente = input("DIGITE SUA OPÇÃO: ")
+        if op_cliente == "1":
             print(post_cliente)
             nome = input("INFORME O NOME DO CLIENTE: ")
             cpf = input("INFORME O CPF DO CLIENTE: ")
@@ -222,7 +260,8 @@ while opcao != "0":
             print("PROCESSANDO...")
             sleep(2)
             print("CLIENTE CADASTRADO COM SUCESSO!")
-        elif opcao2 == "2":
+
+        elif op_cliente == "2":
             print(get_cliente)
             cpf = input("INFORME O CPF DO CLIENTE: ")
             sleep(1)
@@ -233,7 +272,7 @@ while opcao != "0":
                   CPF: {cpf}
                   EMAIL: exterminadordofuturo@gmail.com""")
 
-        elif opcao2 == "3":
+        elif op_cliente == "3":
             print(put_cliente)
             nome = input("INFORME O NOME DO CLIENTE: ")
             cpf = input("INFORME O CPF DO CLIENTE: ")
@@ -243,7 +282,7 @@ while opcao != "0":
             sleep(2)
             print("DADOS DO CLIENTE ALTERADOS COM SUCESSO!")
 
-        elif opcao2 == "4":
+        elif op_cliente == "4":
             print(del_cliente)
             cpf = input("INFORME O CPF DO CLIENTE: ")
             sleep(1)
@@ -251,37 +290,90 @@ while opcao != "0":
             sleep(2)
             print("CLIENTE EXCLUIDO COM SUCESSO!")
 
-        elif opcao == "0":
+        elif op_cliente == "0":
             print("de volta ao menu principal")
 
-    elif opcao == "3":
+
+
+
+#vendas:
+    elif op_princ == "3":
         print(menu_vendas)
-        opcao2 = input("DIGITE SUA OPÇÃO: ")
-        if opcao2 == "1":
+        op_venda = input("DIGITE SUA OPÇÃO: ")
+        if op_venda == "1":
             print(post_venda)
+            vend_id = int(input("INFORME O ID DA VENDA: "))
+            vend_cli = input("INFORME O NOME DO CLIENTE: ")
+            comprou_mais = ""
+            vend_produtos = []
+            while comprou_mais != "N":
+                produto = input("INFORME O NOME DO PRODUTO VENDIDO: ")
+                qnt_produto = int(input(f"INFORME QUANTAS UNIDADES DE {produto} VOCÊ VENDEU PARA {vend_cli}: "))
+                vend_produtos.append([produto, qnt_produto])
+                comprou_mais = input(f"{vend_cli} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
+            sleep(1)
+            print("PROCESSANDO...")
+            sleep(2)
+            print("VENDA CADASTRADA COM SUCESSO!")
 
-        elif opcao2 == "2":
+        elif op_venda == "2":
             print(get_venda)
+            vend_id = input("INFORME O ID DA VENDA: ")
+            sleep(1)
+            print("PROCURANDO VENDA...")
+            sleep(2)
+            print(f"""
+                  ID DA VENDA: {vend_id}
+                  NOME DO CLIENTE: John Connor
+                  PRODUTOS VENDIDOS: [2un - coca 0 lata; 1un - isqueiro; 2un - carteira de cigarros]
+                  VALOR TOTAL: R$ 42.00 
+                  """)
 
-        elif opcao2 == "3":
+        elif op_venda == "3":
             print(put_venda)
+            vend_id = int(input("INFORME O ID DA VENDA: "))
+            vend_cli = input("INFORME O NOME DO CLIENTE: ")
+            comprou_mais = ""
+            vend_produtos = []
+            while comprou_mais != "N":
+                produto = input("INFORME O NOME DO PRODUTO VENDIDO: ")
+                qnt_produto = int(input(f"INFORME QUANTAS UNIDADES DE {produto} VOCÊ VENDEU PARA {vend_cli}: "))
+                vend_produtos.append([produto, qnt_produto])
+                comprou_mais = input(f"{vend_cli} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
+            sleep(1)
+            print("PROCESSANDO ALTERAÇÃO...")
+            sleep(2)
+            print("DADOS DA VENDA ALTERADOS COM SUCESSO!")
 
-        elif opcao2 == "4":
+        elif op_venda == "4":
             print(del_venda)
+            vend_id = input("INFORME O ID DA VENDA: ")
+            sleep(1)
+            print("EXCLUINDO VENDA...")
+            sleep(2)
+            print("VENDA EXCLUIDA COM SUCESSO!")
 
-        elif opcao == "0":
+
+        elif op_venda == "0":
             print("de volta ao menu principal")
 
-    elif opcao == "4":
+
+
+
+#relatórios:
+    elif op_princ == "4":
         print(menu_relatorios)
         opcao2 = input("DIGITE SUA OPÇÃO: ")
         print("esse módulo ainda está em desenvolvimento")
 
-    
-    elif opcao == "5":
+
+
+
+#informações:
+    elif op_princ == "5":
         print(menu_infos)
 
-    elif opcao == "0":
+    elif op_princ == "0":
         print("ENCERRANDO O SISTEMA...")
         sleep(2)
         print("VOLTE SEMPRE!")
