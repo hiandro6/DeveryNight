@@ -184,9 +184,17 @@ del_venda = """
 ====================================
 """
 
+clientes = {
+    '123' : ["Homer Simpson", "homer@springfield.com"],
+    '234' : ["Marge Simpson", "marge@springfield.com"],
+    '345' : ["Bart Simpson", "bart@springfield.com"],
+    '456' : ["Lisa Simpson", "lisa@springfield.com"],
+    '678' : ["Maggie Simpson", "maggie@springfield.com"]   
+}
+
 op_princ = ""
 while op_princ != "0":
-    sleep(2)
+    sleep(1)
     print(menu_principal)
     op_princ = input("DIGITE SUA OPÇÃO: ")
     print("CARREGANDO...")
@@ -258,37 +266,56 @@ while op_princ != "0":
             email = input("INFORME O EMAIL DO CLIENTE: ")
             sleep(1)
             print("PROCESSANDO...")
-            sleep(2)
+            clientes[cpf] = [nome, email]
+            sleep(1)
             print("CLIENTE CADASTRADO COM SUCESSO!")
+            print("todos os clientes: ", clientes) #apenas para testes
 
         elif op_cliente == "2":
             print(get_cliente)
             cpf = input("INFORME O CPF DO CLIENTE: ")
             sleep(1)
             print("PROCURANDO CLIENTE...")
-            sleep(2)
-            print(f"""
-                  NOME: John Connor
+            sleep(1)
+            if cpf in clientes:
+                print(f"""
+                  NOME: {clientes[cpf][0]}
                   CPF: {cpf}
-                  EMAIL: exterminadordofuturo@gmail.com""")
+                  EMAIL: {clientes[cpf][1]}""")
+            else:
+                print("CLIENTE NÃO ENCONTRADO! ")
 
         elif op_cliente == "3":
             print(put_cliente)
-            nome = input("INFORME O NOME DO CLIENTE: ")
             cpf = input("INFORME O CPF DO CLIENTE: ")
-            email = input("INFORME O EMAIL DO CLIENTE")
-            sleep(1)
-            print("PROCESSANDO ALTERAÇÃO...")
-            sleep(2)
-            print("DADOS DO CLIENTE ALTERADOS COM SUCESSO!")
+            if cpf in clientes:
+                nome = input("INFORME O NOME DO CLIENTE: ")
+                email = input("INFORME O EMAIL DO CLIENTE: ")
+                sleep(1)
+                print("PROCESSANDO ALTERAÇÃO...")
+                clientes[cpf] = [nome, email]
+                sleep(1)
+                print("DADOS DO CLIENTE ALTERADOS COM SUCESSO!")
+                print("todos os clientes: ", clientes) #apenas para testes
+            else:
+                print("CLIENTE NÃO ENCONTRADO")
 
         elif op_cliente == "4":
             print(del_cliente)
             cpf = input("INFORME O CPF DO CLIENTE: ")
-            sleep(1)
-            print("EXCLUINDO CLIENTE...")
-            sleep(2)
-            print("CLIENTE EXCLUIDO COM SUCESSO!")
+            if cpf in clientes:
+                confirma = input("DESEJA MESMO EXCLUIR ESSE CLIENTE? [S/N]: ").upper()
+                if confirma == "S":
+                    sleep(1)
+                    print("EXCLUINDO CLIENTE...")
+                    del clientes[cpf]
+                    sleep(1)
+                    print("CLIENTE EXCLUIDO COM SUCESSO!")
+                    print("todos os clientes: ", clientes) #apenas para testes
+                else:
+                    print("EXCLUSÃO CANCELADA!")
+            else:
+                print("CLIENTE NÃO ENCONTRADO! ")
 
         elif op_cliente == "0":
             print("de volta ao menu principal")
