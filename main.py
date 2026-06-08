@@ -48,8 +48,8 @@ menu_vendas = """
 ============================
 
   [1] CADASTRAR VENDA
-  [2] EXIBIR DADOS DO VENDA
-  [3] ALTERAR DADOS DO VENDA
+  [2] EXIBIR DADOS DA VENDA
+  [3] ALTERAR DADOS DA VENDA
   [4] EXCLUIR VENDA
   [0] RETORNAR AO MENU PRINCIPAL
 
@@ -184,12 +184,24 @@ del_venda = """
 ====================================
 """
 
+produtos = {
+    '111' : ["coca 0 lata", 8, "bebidas"],
+    '222' : ["pipoca", 5, "lanches"],
+    '333' : ["cigarro", 2, "tabacaria"]
+}
+
 clientes = {
     '123' : ["Homer Simpson", "homer@springfield.com"],
     '234' : ["Marge Simpson", "marge@springfield.com"],
     '345' : ["Bart Simpson", "bart@springfield.com"],
     '456' : ["Lisa Simpson", "lisa@springfield.com"],
     '678' : ["Maggie Simpson", "maggie@springfield.com"]   
+}
+
+vendas = {
+    '01' : ["Maico Jackson", [["coca 0 lata", 2], ["pipoca", 3]], 58.50],
+    '02' : ["Rick Grimes", [["cigarro", 6], ["isqueiro", 1]], 12.25],
+    '03' : ["Luiz Gonzaga", [["cerveja", 3], ["gelo", 1]], 26.98],
 }
 
 op_princ = ""
@@ -215,39 +227,56 @@ while op_princ != "0":
             categoria = input("INFORME A CATEGORIA DO PRODUTO: ")
             sleep(1)
             print("PROCESSANDO...")
-            sleep(2)
+            produtos[cod_produto] = [nome, preco, categoria]
+            sleep(1)
             print("PRODUTO CADASTRADO COM SUCESSO!")
+            print("produtos: ", produtos) #apenas para teste
 
         elif op_produto == "2":
             print(get_produto)
             cod_produto = int(input("INFORME O CÓDIGO DO PRODUTO: "))
             sleep(1)
             print("PROCURANDO PRODUTO...")
-            sleep(2)
-            print(f"""
-                  CÓDIGO: {cod_produto}
-                  NOME: COCA 0 LATA
-                  PREÇO: 7.00
-                  CATEGORIA: BEBIDAS""")
+            if cod_produto in produtos:
+                print(f""" 
+                CÓDIGO: {cod_produto}
+                NOME: {produtos[cod_produto][0]}
+                PREÇO: {produtos[cod_produto][1]}
+                CATEGORIA: {produtos[cod_produto][2]}
+                """)
+            else:
+                print("PRODUTO NÃO ENCONTRADO!")
 
         elif op_produto == "3":
             print(put_produto)
             cod_produto = int(input("INFORME O CÓDIGO DO PRODUTO: "))
-            nome = input("INFORME O NOME DO PRODUTO: ")
-            preco = float(input("INFORME O PREÇO DO PRODUTO: "))
-            categoria = input("INFORME A CATEGORIA DO PRODUTO: ")
-            sleep(1)
-            print("PROCESSANDO ALTERAÇÃO...")
-            sleep(2)
-            print("DADOS DO PRODUTO ALTERADOS COM SUCESSO!")
+            if cod_produto in produtos:
+                nome = input("INFORME O NOME DO PRODUTO: ")
+                preco = float(input("INFORME O PREÇO DO PRODUTO: "))
+                categoria = input("INFORME A CATEGORIA DO PRODUTO: ")
+                produtos[cod_produto] = [nome, preco, categoria]
+                print("PROCESSANDO ALTERAÇÃO...")
+                sleep(1)
+                print("DADOS DO PRODUTO ALTERADOS COM SUCESSO!")
+                print("produtos:", produtos) #apenas para testes
+            else:
+                print("PRODUTO NÃO ENCONTRADO")
 
         elif op_produto == "4":
             print(del_produto)
-            cpf = input("INFORME O CÓDIGO DO PRODUTO: ")
-            sleep(1)
-            print("EXCLUINDO PRODUTO...")
-            sleep(2)
-            print("PRODUTO EXCLUIDO COM SUCESSO!")
+            cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
+            if cod_produto in produtos:
+                confirma = input("DESEJA MESMO EXCLUIR ESSE PRODUTO? [S/N]: ").upper()
+                if confirma == "S":
+                    print("EXCLUINDO PRODUTO...")
+                    del produtos[cod_produto]
+                    sleep(1)
+                    print("PRODUTO EXCLUIDO COM SUCESSO!")
+                    print("produtos:", produtos) #apenas para testes
+                else:
+                    print("EXCLUSÃO CANCELADA")
+            else:
+                print("PRODUTO NÃO ENCONTRADO!")
 
         elif op_produto == "0":
             print("de volta ao menu principal")
@@ -338,47 +367,63 @@ while op_princ != "0":
                 qnt_produto = int(input(f"INFORME QUANTAS UNIDADES DE {produto} VOCÊ VENDEU PARA {vend_cli}: "))
                 vend_produtos.append([produto, qnt_produto])
                 comprou_mais = input(f"{vend_cli} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
-            sleep(1)
             print("PROCESSANDO...")
-            sleep(2)
+            sleep(1)
+            vend_valor = 500
+            vendas[vend_id] = [vend_cli, vend_produtos, vend_valor]
             print("VENDA CADASTRADA COM SUCESSO!")
+            print("vendas:", vendas)
 
         elif op_venda == "2":
             print(get_venda)
             vend_id = input("INFORME O ID DA VENDA: ")
-            sleep(1)
             print("PROCURANDO VENDA...")
-            sleep(2)
-            print(f"""
+            sleep(1)
+            if vend_id in vendas:
+                print(f"""
                   ID DA VENDA: {vend_id}
-                  NOME DO CLIENTE: John Connor
-                  PRODUTOS VENDIDOS: [2un - coca 0 lata; 1un - isqueiro; 2un - carteira de cigarros]
-                  VALOR TOTAL: R$ 42.00 
+                  NOME DO CLIENTE: {vendas[vend_id][0]}
+                  PRODUTOS VENDIDOS: {vendas[vend_id][1]}
+                  VALOR TOTAL: R$ {vendas[vend_id][2]}
                   """)
+            else:
+                print("VENDA NÃO ENCONTRADA!")
 
         elif op_venda == "3":
             print(put_venda)
             vend_id = int(input("INFORME O ID DA VENDA: "))
-            vend_cli = input("INFORME O NOME DO CLIENTE: ")
-            comprou_mais = ""
-            vend_produtos = []
-            while comprou_mais != "N":
-                produto = input("INFORME O NOME DO PRODUTO VENDIDO: ")
-                qnt_produto = int(input(f"INFORME QUANTAS UNIDADES DE {produto} VOCÊ VENDEU PARA {vend_cli}: "))
-                vend_produtos.append([produto, qnt_produto])
-                comprou_mais = input(f"{vend_cli} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
-            sleep(1)
-            print("PROCESSANDO ALTERAÇÃO...")
-            sleep(2)
-            print("DADOS DA VENDA ALTERADOS COM SUCESSO!")
+            if vend_id in vendas:
+                vend_cli = input("INFORME O NOME DO CLIENTE: ")
+                comprou_mais = ""
+                vend_produtos = []
+                while comprou_mais != "N":
+                    produto = input("INFORME O NOME DO PRODUTO VENDIDO: ")
+                    qnt_produto = int(input(f"INFORME QUANTAS UNIDADES DE {produto} VOCÊ VENDEU PARA {vend_cli}: "))
+                    vend_produtos.append([produto, qnt_produto])
+                    comprou_mais = input(f"{vend_cli} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
+                print("PROCESSANDO ALTERAÇÃO...")
+                sleep(1)
+                vend_valor = 500
+                vendas[vend_id] = [vend_cli, vend_produtos, vend_valor]
+                print("DADOS DA VENDA ALTERADOS COM SUCESSO!")
+                print("vendas", vendas) #apenas para testes
+            else:
+                print("VENDA NÃO ENCONTRADA!")
 
         elif op_venda == "4":
             print(del_venda)
             vend_id = input("INFORME O ID DA VENDA: ")
-            sleep(1)
-            print("EXCLUINDO VENDA...")
-            sleep(2)
-            print("VENDA EXCLUIDA COM SUCESSO!")
+            if vend_id in vendas:
+                confirma = input("DESEJA MESMO EXCLUIR ESSA VENDA? [S/N]: ").upper()
+                if confirma == "S":
+                    print("EXCLUINDO VENDA...")
+                    sleep(1)
+                    del vendas[vend_id]
+                    print("VENDA EXCLUIDA COM SUCESSO!")
+                else: 
+                    print("EXCLUSÃO CANCELADA!")
+            else:
+                print("VENDA NÃO ENCONTRADA!")
 
 
         elif op_venda == "0":
