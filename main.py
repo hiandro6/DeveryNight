@@ -223,7 +223,7 @@ while op_princ != "0":
             op_produto = input("DIGITE SUA OPÇÃO: ")
             if op_produto == "1":
                 print(post_produto)
-                cod_produto = int(input("INFORME O CÓDIGO DO PRODUTO: "))
+                cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
                 nome = input("INFORME O NOME DO PRODUTO: ")
                 preco = float(input("INFORME O PREÇO DO PRODUTO: "))
                 categoria = input("INFORME A CATEGORIA DO PRODUTO: ")
@@ -236,7 +236,7 @@ while op_princ != "0":
 
             elif op_produto == "2":
                 print(get_produto)
-                cod_produto = int(input("INFORME O CÓDIGO DO PRODUTO: "))
+                cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
                 sleep(1)
                 print("PROCURANDO PRODUTO...")
                 if cod_produto in produtos:
@@ -251,7 +251,7 @@ while op_princ != "0":
 
             elif op_produto == "3":
                 print(put_produto)
-                cod_produto = int(input("INFORME O CÓDIGO DO PRODUTO: "))
+                cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
                 if cod_produto in produtos:
                     nome = input("INFORME O NOME DO PRODUTO: ")
                     preco = float(input("INFORME O PREÇO DO PRODUTO: "))
@@ -362,7 +362,7 @@ while op_princ != "0":
             op_venda = input("DIGITE SUA OPÇÃO: ")
             if op_venda == "1":
                 print(post_venda)
-                vend_id = int(input("INFORME O ID DA VENDA: "))
+                vend_id = input("INFORME O ID DA VENDA: ")
                 vend_cli = input("INFORME O NOME DO CLIENTE: ")
                 comprou_mais = ""
                 vend_produtos = []
@@ -395,7 +395,7 @@ while op_princ != "0":
 
             elif op_venda == "3":
                 print(put_venda)
-                vend_id = int(input("INFORME O ID DA VENDA: "))
+                vend_id = input("INFORME O ID DA VENDA: ")
                 if vend_id in vendas:
                     vend_cli = input("INFORME O NOME DO CLIENTE: ")
                     comprou_mais = ""
