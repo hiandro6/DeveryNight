@@ -421,8 +421,18 @@ while op_princ != "0":
                 vend_produtos.append([produto, qnt_produto])
                 comprou_mais = input(f"{vend_cli} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
             print("PROCESSANDO...")
+
             sleep(1)
-            vend_valor = 500
+
+            vend_valor = 0
+            for item_venda in vend_produtos:
+                nome_produto = item_venda[0]
+                quantidade = item_venda[1]
+                for cod in produtos:
+                    if produtos[cod][0] == nome_produto:
+                        preco = produtos[cod][1]
+                        vend_valor = (vend_valor + (preco * quantidade))
+
             vendas[vend_id] = [vend_cli, vend_produtos, vend_valor]
             print("VENDA CADASTRADA COM SUCESSO!")
             print("vendas:", vendas)
@@ -456,8 +466,17 @@ while op_princ != "0":
                     comprou_mais = input(f"{vend_cli} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
                 print("PROCESSANDO ALTERAÇÃO...")
                 sleep(1)
-                vend_valor = 500
+                vend_valor = 0
+                for item_venda in vend_produtos:
+                    nome_produto = item_venda[0]
+                    quantidade = item_venda[1]
+                    for cod in produtos:
+                        if produtos[cod][0] == nome_produto:
+                            preco = produtos[cod][1]
+                            vend_valor = (vend_valor + (preco * quantidade))
+
                 vendas[vend_id] = [vend_cli, vend_produtos, vend_valor]
+
                 print("DADOS DA VENDA ALTERADOS COM SUCESSO!")
                 print("vendas", vendas) #apenas para testes
             else:
