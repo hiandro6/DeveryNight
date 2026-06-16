@@ -2,6 +2,7 @@ from time import sleep
 
 ARQUIVO_PRODUTOS = "produtos.txt"
 ARQUIVO_CLIENTES = "clientes.txt"
+ARQUIVO_VENDAS = "vendas.txt"
 
 
 
@@ -65,6 +66,67 @@ except FileNotFoundError:
             + clientes[cpf][1]
             + "\n"
         )
+    arquivo.close()
+
+
+vendas = {}
+
+try:
+    arquivo = open("vendas.txt", "r", encoding="utf-8")
+    for linha in arquivo:
+        linha = linha.rstrip()
+        campos = linha.split(";")
+
+        id_venda = campos[0]
+        cliente = campos[1]
+        valor = float(campos[3])
+
+        produtos_vendidos = []
+        lista_produtos = campos[2].split("|")
+        for produto in lista_produtos:
+            dados = produto.split(",")
+            produtos_vendidos.append([dados[0], int(dados[1])])
+
+        vendas[id_venda] = [cliente, produtos_vendidos, valor]
+
+    arquivo.close()
+
+except FileNotFoundError:
+
+    vendas = {
+        '01': ["Maico Jackson", [["coca 0 lata", 2], ["pipoca", 3]], 31],
+        '02': ["Rick Grimes", [["cigarro", 1]], 2]
+    }
+
+    arquivo = open("vendas.txt", "w", encoding="utf-8")
+
+    for id_venda in vendas:
+
+        texto_produtos = ""
+
+        for produto in vendas[id_venda][1]:
+
+            texto_produtos = (
+                texto_produtos
+                + produto[0]
+                + ","
+                + str(produto[1])
+                + "|"
+            )
+
+        texto_produtos = texto_produtos.rstrip("|")
+
+        arquivo.write(
+            id_venda
+            + ";"
+            + vendas[id_venda][0]
+            + ";"
+            + texto_produtos
+            + ";"
+            + str(vendas[id_venda][2])
+            + "\n"
+        )
+
     arquivo.close()
 
 menu_principal = """
@@ -248,14 +310,6 @@ del_venda = """
 ===== DELETANDO DADOS DA VENDA =====
 ====================================
 """
-
-
-
-vendas = {
-    '01' : ["Maico Jackson", [["coca 0 lata", 2], ["pipoca", 3]], 58.50],
-    '02' : ["Rick Grimes", [["cigarro", 6], ["isqueiro", 1]], 12.25],
-    '03' : ["Luiz Gonzaga", [["cerveja", 3], ["gelo", 1]], 26.98],
-}
 
 op_princ = ""
 while op_princ != "0":
@@ -518,14 +572,9 @@ while op_princ != "0":
         print(menu_infos)
 
     elif op_princ == "0":
-        arquivo = open(
-            "produtos.txt",
-            "w",
-            encoding="utf-8"
-        )
+        arquivo = open("produtos.txt", "w", encoding="utf-8")
 
         for cod in produtos:
-
             arquivo.write(
                 cod
                 + ";"
@@ -536,19 +585,13 @@ while op_princ != "0":
                 + produtos[cod][2]
                 + "\n"
             )
-
         arquivo.close()
 
 
 
-        arquivo = open(
-            "clientes.txt",
-            "w",
-            encoding="utf-8"
-        )
+        arquivo = open("clientes.txt", "w", encoding="utf-8")
 
         for cpf in clientes:
-
             arquivo.write(
                 cpf
                 + ";"
@@ -557,15 +600,37 @@ while op_princ != "0":
                 + clientes[cpf][1]
                 + "\n"
             )
-
         arquivo.close()
 
 
 
+        arquivo = open("vendas.txt", "w", encoding="utf-8")
+        for id_venda in vendas:
+            texto_produtos = ""
+            for produto in vendas[id_venda][1]:
+                texto_produtos = (
+                    texto_produtos
+                    + produto[0]
+                    + ","
+                    + str(produto[1])
+                    + "|"
+                )
+
+            texto_produtos = texto_produtos.rstrip("|")
+            arquivo.write(
+                id_venda
+                + ";"
+                + vendas[id_venda][0]
+                + ";"
+                + texto_produtos
+                + ";"
+                + str(vendas[id_venda][2])
+                + "\n"
+            )
+        arquivo.close()
+
         print("ENCERRANDO O SISTEMA...")
-
         sleep(1)
-
         print("VOLTE SEMPRE!")
 
 
