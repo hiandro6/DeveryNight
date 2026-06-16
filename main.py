@@ -1,6 +1,71 @@
 from time import sleep
 
+ARQUIVO_PRODUTOS = "produtos.txt"
+ARQUIVO_CLIENTES = "clientes.txt"
+
+
+
 print("BEM VINDO AO DEVERY NIGHT, SEU SISTEMA DE GESTÃO PARA CONVÊNIENCIA")
+
+
+produtos = {}
+
+try:
+    arquivo = open("produtos.txt","r",encoding="utf-8")
+    for linha in arquivo:
+        linha = linha.rstrip()
+        campos = linha.split(";")
+        produtos[campos[0]] = [campos[1],float(campos[2]),campos[3]]
+    arquivo.close()
+except FileNotFoundError:
+    produtos = {
+    '111': ["coca 0 lata", 8, "bebidas"],
+    '222': ["pipoca", 5, "lanches"],
+    '333': ["cigarro", 2, "tabacaria"]
+    }
+    arquivo = open("produtos.txt","w",encoding="utf-8")
+    for cod in produtos:
+        arquivo.write(
+            cod
+            + ";"
+            + produtos[cod][0]
+            + ";"
+            + str(produtos[cod][1])
+            + ";"
+            + produtos[cod][2]
+            + "\n"
+        )
+    arquivo.close()
+
+
+
+clientes = {}
+try:
+    arquivo = open("clientes.txt","r",encoding="utf-8")
+    for linha in arquivo:
+        linha = linha.rstrip()
+        campos = linha.split(";")
+        clientes[campos[0]] = [campos[1],campos[2]]
+    arquivo.close()
+except FileNotFoundError:
+    clientes = {
+    '123': ["Homer Simpson", "homer@springfield.com"],
+    '234': ["Marge Simpson", "marge@springfield.com"],
+    '345': ["Bart Simpson", "bart@springfield.com"],
+    '456': ["Lisa Simpson", "lisa@springfield.com"],
+    '678': ["Maggie Simpson", "maggie@springfield.com"]
+    }
+    arquivo = open("clientes.txt","w",encoding="utf-8")
+    for cpf in clientes:
+        arquivo.write(
+            cpf
+            + ";"
+            + clientes[cpf][0]
+            + ";"
+            + clientes[cpf][1]
+            + "\n"
+        )
+    arquivo.close()
 
 menu_principal = """
 ============================
@@ -184,19 +249,7 @@ del_venda = """
 ====================================
 """
 
-produtos = {
-    '111' : ["coca 0 lata", 8, "bebidas"],
-    '222' : ["pipoca", 5, "lanches"],
-    '333' : ["cigarro", 2, "tabacaria"]
-}
 
-clientes = {
-    '123' : ["Homer Simpson", "homer@springfield.com"],
-    '234' : ["Marge Simpson", "marge@springfield.com"],
-    '345' : ["Bart Simpson", "bart@springfield.com"],
-    '456' : ["Lisa Simpson", "lisa@springfield.com"],
-    '678' : ["Maggie Simpson", "maggie@springfield.com"]   
-}
 
 vendas = {
     '01' : ["Maico Jackson", [["coca 0 lata", 2], ["pipoca", 3]], 58.50],
@@ -217,152 +270,182 @@ while op_princ != "0":
 
 #produtos:
     if op_princ == "1":
-        op_produto = ""
-        while op_produto != "0":
-            print(menu_produtos)
-            op_produto = input("DIGITE SUA OPÇÃO: ")
-            if op_produto == "1":
-                print(post_produto)
-                cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
+        print(menu_produtos)
+        op_produto = input("DIGITE SUA OPÇÃO: ")
+        if op_produto == "1":
+            print(post_produto)
+            cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
+            nome = input("INFORME O NOME DO PRODUTO: ")
+            preco = float(input("INFORME O PREÇO DO PRODUTO: "))
+            categoria = input("INFORME A CATEGORIA DO PRODUTO: ")
+            sleep(1)
+            print("PROCESSANDO...")
+            produtos[cod_produto] = [nome, preco, categoria]
+            sleep(1)
+            print("PRODUTO CADASTRADO COM SUCESSO!")
+            print("produtos: ", produtos) #apenas para teste
+
+        elif op_produto == "2":
+            print(get_produto)
+            cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
+            sleep(1)
+            print("PROCURANDO PRODUTO...")
+            if cod_produto in produtos:
+                print(f""" 
+                CÓDIGO: {cod_produto}
+                NOME: {produtos[cod_produto][0]}
+                PREÇO: {produtos[cod_produto][1]}
+                CATEGORIA: {produtos[cod_produto][2]}
+                """)
+            else:
+                print("PRODUTO NÃO ENCONTRADO!")
+
+        elif op_produto == "3":
+            print(put_produto)
+            cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
+            if cod_produto in produtos:
                 nome = input("INFORME O NOME DO PRODUTO: ")
                 preco = float(input("INFORME O PREÇO DO PRODUTO: "))
                 categoria = input("INFORME A CATEGORIA DO PRODUTO: ")
-                sleep(1)
-                print("PROCESSANDO...")
                 produtos[cod_produto] = [nome, preco, categoria]
+                print("PROCESSANDO ALTERAÇÃO...")
                 sleep(1)
-                print("PRODUTO CADASTRADO COM SUCESSO!")
-                print("produtos: ", produtos) #apenas para teste
+                print("DADOS DO PRODUTO ALTERADOS COM SUCESSO!")
+                print("produtos:", produtos) #apenas para testes
+            else:
+                print("PRODUTO NÃO ENCONTRADO")
 
-            elif op_produto == "2":
-                print(get_produto)
-                cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
-                sleep(1)
-                print("PROCURANDO PRODUTO...")
-                if cod_produto in produtos:
-                    print(f""" 
-                    CÓDIGO: {cod_produto}
-                    NOME: {produtos[cod_produto][0]}
-                    PREÇO: {produtos[cod_produto][1]}
-                    CATEGORIA: {produtos[cod_produto][2]}
-                    """)
-                else:
-                    print("PRODUTO NÃO ENCONTRADO!")
-
-            elif op_produto == "3":
-                print(put_produto)
-                cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
-                if cod_produto in produtos:
-                    nome = input("INFORME O NOME DO PRODUTO: ")
-                    preco = float(input("INFORME O PREÇO DO PRODUTO: "))
-                    categoria = input("INFORME A CATEGORIA DO PRODUTO: ")
-                    produtos[cod_produto] = [nome, preco, categoria]
-                    print("PROCESSANDO ALTERAÇÃO...")
+        elif op_produto == "4":
+            print(del_produto)
+            cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
+            if cod_produto in produtos:
+                confirma = input("DESEJA MESMO EXCLUIR ESSE PRODUTO? [S/N]: ").upper()
+                if confirma == "S":
+                    print("EXCLUINDO PRODUTO...")
+                    del produtos[cod_produto]
                     sleep(1)
-                    print("DADOS DO PRODUTO ALTERADOS COM SUCESSO!")
+                    print("PRODUTO EXCLUIDO COM SUCESSO!")
                     print("produtos:", produtos) #apenas para testes
                 else:
-                    print("PRODUTO NÃO ENCONTRADO")
+                    print("EXCLUSÃO CANCELADA")
+            else:
+                print("PRODUTO NÃO ENCONTRADO!")
 
-            elif op_produto == "4":
-                print(del_produto)
-                cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
-                if cod_produto in produtos:
-                    confirma = input("DESEJA MESMO EXCLUIR ESSE PRODUTO? [S/N]: ").upper()
-                    if confirma == "S":
-                        print("EXCLUINDO PRODUTO...")
-                        del produtos[cod_produto]
-                        sleep(1)
-                        print("PRODUTO EXCLUIDO COM SUCESSO!")
-                        print("produtos:", produtos) #apenas para testes
-                    else:
-                        print("EXCLUSÃO CANCELADA")
-                else:
-                    print("PRODUTO NÃO ENCONTRADO!")
+        elif op_produto == "0":
+            print("de volta ao menu principal")
 
-            elif op_produto == "0":
-                print("de volta ao menu principal")
 
 
 
 #clientes:
     elif op_princ == "2":
-        op_cliente = ""
-        while op_cliente != "0":
-            print(menu_clientes)
-            op_cliente = input("DIGITE SUA OPÇÃO: ")
-            if op_cliente == "1":
-                print(post_cliente)
+        print(menu_clientes)
+        op_cliente = input("DIGITE SUA OPÇÃO: ")
+        if op_cliente == "1":
+            print(post_cliente)
+            nome = input("INFORME O NOME DO CLIENTE: ")
+            cpf = input("INFORME O CPF DO CLIENTE: ")
+            email = input("INFORME O EMAIL DO CLIENTE: ")
+            sleep(1)
+            print("PROCESSANDO...")
+            clientes[cpf] = [nome, email]
+            sleep(1)
+            print("CLIENTE CADASTRADO COM SUCESSO!")
+            print("todos os clientes: ", clientes) #apenas para testes
+
+        elif op_cliente == "2":
+            print(get_cliente)
+            cpf = input("INFORME O CPF DO CLIENTE: ")
+            sleep(1)
+            print("PROCURANDO CLIENTE...")
+            sleep(1)
+            if cpf in clientes:
+                print(f"""
+                  NOME: {clientes[cpf][0]}
+                  CPF: {cpf}
+                  EMAIL: {clientes[cpf][1]}""")
+            else:
+                print("CLIENTE NÃO ENCONTRADO! ")
+
+        elif op_cliente == "3":
+            print(put_cliente)
+            cpf = input("INFORME O CPF DO CLIENTE: ")
+            if cpf in clientes:
                 nome = input("INFORME O NOME DO CLIENTE: ")
-                cpf = input("INFORME O CPF DO CLIENTE: ")
                 email = input("INFORME O EMAIL DO CLIENTE: ")
                 sleep(1)
-                print("PROCESSANDO...")
+                print("PROCESSANDO ALTERAÇÃO...")
                 clientes[cpf] = [nome, email]
                 sleep(1)
-                print("CLIENTE CADASTRADO COM SUCESSO!")
+                print("DADOS DO CLIENTE ALTERADOS COM SUCESSO!")
                 print("todos os clientes: ", clientes) #apenas para testes
+            else:
+                print("CLIENTE NÃO ENCONTRADO")
 
-            elif op_cliente == "2":
-                print(get_cliente)
-                cpf = input("INFORME O CPF DO CLIENTE: ")
-                sleep(1)
-                print("PROCURANDO CLIENTE...")
-                sleep(1)
-                if cpf in clientes:
-                    print(f"""
-                      NOME: {clientes[cpf][0]}
-                      CPF: {cpf}
-                      EMAIL: {clientes[cpf][1]}""")
-                else:
-                    print("CLIENTE NÃO ENCONTRADO! ")
-
-            elif op_cliente == "3":
-                print(put_cliente)
-                cpf = input("INFORME O CPF DO CLIENTE: ")
-                if cpf in clientes:
-                    nome = input("INFORME O NOME DO CLIENTE: ")
-                    email = input("INFORME O EMAIL DO CLIENTE: ")
+        elif op_cliente == "4":
+            print(del_cliente)
+            cpf = input("INFORME O CPF DO CLIENTE: ")
+            if cpf in clientes:
+                confirma = input("DESEJA MESMO EXCLUIR ESSE CLIENTE? [S/N]: ").upper()
+                if confirma == "S":
                     sleep(1)
-                    print("PROCESSANDO ALTERAÇÃO...")
-                    clientes[cpf] = [nome, email]
+                    print("EXCLUINDO CLIENTE...")
+                    del clientes[cpf]
                     sleep(1)
-                    print("DADOS DO CLIENTE ALTERADOS COM SUCESSO!")
+                    print("CLIENTE EXCLUIDO COM SUCESSO!")
                     print("todos os clientes: ", clientes) #apenas para testes
                 else:
-                    print("CLIENTE NÃO ENCONTRADO")
+                    print("EXCLUSÃO CANCELADA!")
+            else:
+                print("CLIENTE NÃO ENCONTRADO! ")
 
-            elif op_cliente == "4":
-                print(del_cliente)
-                cpf = input("INFORME O CPF DO CLIENTE: ")
-                if cpf in clientes:
-                    confirma = input("DESEJA MESMO EXCLUIR ESSE CLIENTE? [S/N]: ").upper()
-                    if confirma == "S":
-                        sleep(1)
-                        print("EXCLUINDO CLIENTE...")
-                        del clientes[cpf]
-                        sleep(1)
-                        print("CLIENTE EXCLUIDO COM SUCESSO!")
-                        print("todos os clientes: ", clientes) #apenas para testes
-                    else:
-                        print("EXCLUSÃO CANCELADA!")
-                else:
-                    print("CLIENTE NÃO ENCONTRADO! ")
+        elif op_cliente == "0":
+            print("de volta ao menu principal")
 
-            elif op_cliente == "0":
-                print("de volta ao menu principal")
 
 
 
 #vendas:
     elif op_princ == "3":
-        op_venda = ""
-        while op_venda != "0":
-            print(menu_vendas)
-            op_venda = input("DIGITE SUA OPÇÃO: ")
-            if op_venda == "1":
-                print(post_venda)
-                vend_id = input("INFORME O ID DA VENDA: ")
+        print(menu_vendas)
+        op_venda = input("DIGITE SUA OPÇÃO: ")
+        if op_venda == "1":
+            print(post_venda)
+            vend_id = input("INFORME O ID DA VENDA: ")
+            vend_cli = input("INFORME O NOME DO CLIENTE: ")
+            comprou_mais = ""
+            vend_produtos = []
+            while comprou_mais != "N":
+                produto = input("INFORME O NOME DO PRODUTO VENDIDO: ")
+                qnt_produto = int(input(f"INFORME QUANTAS UNIDADES DE {produto} VOCÊ VENDEU PARA {vend_cli}: "))
+                vend_produtos.append([produto, qnt_produto])
+                comprou_mais = input(f"{vend_cli} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
+            print("PROCESSANDO...")
+            sleep(1)
+            vend_valor = 500
+            vendas[vend_id] = [vend_cli, vend_produtos, vend_valor]
+            print("VENDA CADASTRADA COM SUCESSO!")
+            print("vendas:", vendas)
+
+        elif op_venda == "2":
+            print(get_venda)
+            vend_id = input("INFORME O ID DA VENDA: ")
+            print("PROCURANDO VENDA...")
+            sleep(1)
+            if vend_id in vendas:
+                print(f"""
+                  ID DA VENDA: {vend_id}
+                  NOME DO CLIENTE: {vendas[vend_id][0]}
+                  PRODUTOS VENDIDOS: {vendas[vend_id][1]}
+                  VALOR TOTAL: R$ {vendas[vend_id][2]}
+                  """)
+            else:
+                print("VENDA NÃO ENCONTRADA!")
+
+        elif op_venda == "3":
+            print(put_venda)
+            vend_id = input("INFORME O ID DA VENDA: ")
+            if vend_id in vendas:
                 vend_cli = input("INFORME O NOME DO CLIENTE: ")
                 comprou_mais = ""
                 vend_produtos = []
@@ -371,67 +454,34 @@ while op_princ != "0":
                     qnt_produto = int(input(f"INFORME QUANTAS UNIDADES DE {produto} VOCÊ VENDEU PARA {vend_cli}: "))
                     vend_produtos.append([produto, qnt_produto])
                     comprou_mais = input(f"{vend_cli} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
-                print("PROCESSANDO...")
+                print("PROCESSANDO ALTERAÇÃO...")
                 sleep(1)
                 vend_valor = 500
                 vendas[vend_id] = [vend_cli, vend_produtos, vend_valor]
-                print("VENDA CADASTRADA COM SUCESSO!")
-                print("vendas:", vendas)
+                print("DADOS DA VENDA ALTERADOS COM SUCESSO!")
+                print("vendas", vendas) #apenas para testes
+            else:
+                print("VENDA NÃO ENCONTRADA!")
 
-            elif op_venda == "2":
-                print(get_venda)
-                vend_id = input("INFORME O ID DA VENDA: ")
-                print("PROCURANDO VENDA...")
-                sleep(1)
-                if vend_id in vendas:
-                    print(f"""
-                      ID DA VENDA: {vend_id}
-                      NOME DO CLIENTE: {vendas[vend_id][0]}
-                      PRODUTOS VENDIDOS: {vendas[vend_id][1]}
-                      VALOR TOTAL: R$ {vendas[vend_id][2]}
-                      """)
-                else:
-                    print("VENDA NÃO ENCONTRADA!")
-
-            elif op_venda == "3":
-                print(put_venda)
-                vend_id = input("INFORME O ID DA VENDA: ")
-                if vend_id in vendas:
-                    vend_cli = input("INFORME O NOME DO CLIENTE: ")
-                    comprou_mais = ""
-                    vend_produtos = []
-                    while comprou_mais != "N":
-                        produto = input("INFORME O NOME DO PRODUTO VENDIDO: ")
-                        qnt_produto = int(input(f"INFORME QUANTAS UNIDADES DE {produto} VOCÊ VENDEU PARA {vend_cli}: "))
-                        vend_produtos.append([produto, qnt_produto])
-                        comprou_mais = input(f"{vend_cli} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
-                    print("PROCESSANDO ALTERAÇÃO...")
+        elif op_venda == "4":
+            print(del_venda)
+            vend_id = input("INFORME O ID DA VENDA: ")
+            if vend_id in vendas:
+                confirma = input("DESEJA MESMO EXCLUIR ESSA VENDA? [S/N]: ").upper()
+                if confirma == "S":
+                    print("EXCLUINDO VENDA...")
                     sleep(1)
-                    vend_valor = 500
-                    vendas[vend_id] = [vend_cli, vend_produtos, vend_valor]
-                    print("DADOS DA VENDA ALTERADOS COM SUCESSO!")
-                    print("vendas", vendas) #apenas para testes
-                else:
-                    print("VENDA NÃO ENCONTRADA!")
-
-            elif op_venda == "4":
-                print(del_venda)
-                vend_id = input("INFORME O ID DA VENDA: ")
-                if vend_id in vendas:
-                    confirma = input("DESEJA MESMO EXCLUIR ESSA VENDA? [S/N]: ").upper()
-                    if confirma == "S":
-                        print("EXCLUINDO VENDA...")
-                        sleep(1)
-                        del vendas[vend_id]
-                        print("VENDA EXCLUIDA COM SUCESSO!")
-                    else: 
-                        print("EXCLUSÃO CANCELADA!")
-                else:
-                    print("VENDA NÃO ENCONTRADA!")
+                    del vendas[vend_id]
+                    print("VENDA EXCLUIDA COM SUCESSO!")
+                else: 
+                    print("EXCLUSÃO CANCELADA!")
+            else:
+                print("VENDA NÃO ENCONTRADA!")
 
 
-            elif op_venda == "0":
-                print("de volta ao menu principal")
+        elif op_venda == "0":
+            print("de volta ao menu principal")
+
 
 
 
@@ -449,10 +499,56 @@ while op_princ != "0":
         print(menu_infos)
 
     elif op_princ == "0":
+        arquivo = open(
+            "produtos.txt",
+            "w",
+            encoding="utf-8"
+        )
+
+        for cod in produtos:
+
+            arquivo.write(
+                cod
+                + ";"
+                + produtos[cod][0]
+                + ";"
+                + str(produtos[cod][1])
+                + ";"
+                + produtos[cod][2]
+                + "\n"
+            )
+
+        arquivo.close()
+
+
+
+        arquivo = open(
+            "clientes.txt",
+            "w",
+            encoding="utf-8"
+        )
+
+        for cpf in clientes:
+
+            arquivo.write(
+                cpf
+                + ";"
+                + clientes[cpf][0]
+                + ";"
+                + clientes[cpf][1]
+                + "\n"
+            )
+
+        arquivo.close()
+
+
+
         print("ENCERRANDO O SISTEMA...")
-        sleep(2)
-        print("VOLTE SEMPRE!")
+
         sleep(1)
+
+        print("VOLTE SEMPRE!")
+
 
     else:
         print(menu_invalido)
