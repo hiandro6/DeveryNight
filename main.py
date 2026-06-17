@@ -1,18 +1,16 @@
 from time import sleep
-
-ARQUIVO_PRODUTOS = "produtos.txt"
-ARQUIVO_CLIENTES = "clientes.txt"
-ARQUIVO_VENDAS = "vendas.txt"
+from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto 
+from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente 
+from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda
 
 
 
 print("BEM VINDO AO DEVERY NIGHT, SEU SISTEMA DE GESTÃO PARA CONVÊNIENCIA")
 
 
-produtos = {}
 
 try:
-    arquivo = open("produtos.txt","r",encoding="utf-8")
+    arquivo = open(ARQUIVO_PRODUTOS,"r",encoding="utf-8")
     for linha in arquivo:
         linha = linha.rstrip()
         campos = linha.split(";")
@@ -24,7 +22,7 @@ except FileNotFoundError:
     '222': ["pipoca", 5, "lanches"],
     '333': ["cigarro", 2, "tabacaria"]
     }
-    arquivo = open("produtos.txt","w",encoding="utf-8")
+    arquivo = open(ARQUIVO_PRODUTOS,"w",encoding="utf-8")
     for cod in produtos:
         arquivo.write(
             cod
@@ -40,9 +38,8 @@ except FileNotFoundError:
 
 
 
-clientes = {}
 try:
-    arquivo = open("clientes.txt","r",encoding="utf-8")
+    arquivo = open(ARQUIVO_CLIENTES,"r",encoding="utf-8")
     for linha in arquivo:
         linha = linha.rstrip()
         campos = linha.split(";")
@@ -56,7 +53,7 @@ except FileNotFoundError:
     '456': ["Lisa Simpson", "lisa@springfield.com"],
     '678': ["Maggie Simpson", "maggie@springfield.com"]
     }
-    arquivo = open("clientes.txt","w",encoding="utf-8")
+    arquivo = open(ARQUIVO_CLIENTES,"w",encoding="utf-8")
     for cpf in clientes:
         arquivo.write(
             cpf
@@ -69,10 +66,9 @@ except FileNotFoundError:
     arquivo.close()
 
 
-vendas = {}
 
 try:
-    arquivo = open("vendas.txt", "r", encoding="utf-8")
+    arquivo = open(ARQUIVO_VENDAS, "r", encoding="utf-8")
     for linha in arquivo:
         linha = linha.rstrip()
         campos = linha.split(";")
@@ -98,7 +94,7 @@ except FileNotFoundError:
         '02': ["Rick Grimes", [["cigarro", 1]], 2]
     }
 
-    arquivo = open("vendas.txt", "w", encoding="utf-8")
+    arquivo = open(ARQUIVO_VENDAS, "w", encoding="utf-8")
 
     for id_venda in vendas:
 
@@ -143,44 +139,8 @@ menu_principal = """
   
 """
 
-menu_produtos = """
-============================
-===== MÓDULO PRODUTOS ======
-============================
 
-  [1] CADASTRAR PRODUTO
-  [2] EXIBIR DADOS DO PRODUTO
-  [3] ALTERAR DADOS DO PRODUTO
-  [4] EXCLUIR PRODUTO
-  [0] RETORNAR AO MENU PRINCIPAL
 
-"""
-
-menu_clientes = """
-============================
-====== MÓDULO CLIENTES =====
-============================
-
-  [1] CADASTRAR CLIENTE
-  [2] EXIBIR DADOS DO CLIENTE
-  [3] ALTERAR DADOS DO CLIENTE
-  [4] EXCLUIR CLIENTE
-  [0] RETORNAR AO MENU PRINCIPAL
-
-"""
-
-menu_vendas = """
-============================
-====== MÓDULO VENDAS =======
-============================
-
-  [1] CADASTRAR VENDA
-  [2] EXIBIR DADOS DA VENDA
-  [3] ALTERAR DADOS DA VENDA
-  [4] EXCLUIR VENDA
-  [0] RETORNAR AO MENU PRINCIPAL
-
-"""
 
 menu_relatorios = """
 ============================
@@ -231,85 +191,11 @@ menu_invalido = """
 
 
 
-post_produto = """
-====================================
-=== CADASTRANDO DADOS DO PRODUTO ===
-====================================
-"""
-
-get_produto = """
-====================================
-==== EXIBINDO DADOS DO PRODUTO =====
-====================================
-"""
-
-put_produto = """
-====================================
-==== ALTERANDO DADOS DO PRODUTO ====
-====================================
-"""
-
-del_produto = """
-====================================
-==== DELETANDO DADOS DO PRODUTO ====
-====================================
-"""
 
 
 
 
 
-post_cliente = """
-====================================
-=== CADASTRANDO DADOS DO CLIENTE ===
-====================================
-"""
-
-get_cliente = """
-====================================
-==== EXIBINDO DADOS DO CLIENTE =====
-====================================
-"""
-
-put_cliente = """
-====================================
-==== ALTERANDO DADOS DO CLIENTE ====
-====================================
-"""
-
-del_cliente = """
-====================================
-==== DELETANDO DADOS DO CLIENTE ====
-====================================
-"""
-
-
-
-
-
-post_venda = """
-====================================
-=== CADASTRANDO DADOS DA VENDA =====
-====================================
-"""
-
-get_venda = """
-====================================
-===== EXIBINDO DADOS DA VENDA ======
-====================================
-"""
-
-put_venda = """
-====================================
-===== ALTERANDO DADOS DA VENDA =====
-====================================
-"""
-
-del_venda = """
-====================================
-===== DELETANDO DADOS DA VENDA =====
-====================================
-"""
 
 op_princ = ""
 while op_princ != "0":
@@ -572,7 +458,7 @@ while op_princ != "0":
         print(menu_infos)
 
     elif op_princ == "0":
-        arquivo = open("produtos.txt", "w", encoding="utf-8")
+        arquivo = open(ARQUIVO_PRODUTOS, "w", encoding="utf-8")
 
         for cod in produtos:
             arquivo.write(
@@ -589,7 +475,7 @@ while op_princ != "0":
 
 
 
-        arquivo = open("clientes.txt", "w", encoding="utf-8")
+        arquivo = open(ARQUIVO_CLIENTES, "w", encoding="utf-8")
 
         for cpf in clientes:
             arquivo.write(
@@ -604,7 +490,7 @@ while op_princ != "0":
 
 
 
-        arquivo = open("vendas.txt", "w", encoding="utf-8")
+        arquivo = open(ARQUIVO_VENDAS, "w", encoding="utf-8")
         for id_venda in vendas:
             texto_produtos = ""
             for produto in vendas[id_venda][1]:
@@ -632,7 +518,6 @@ while op_princ != "0":
         print("ENCERRANDO O SISTEMA...")
         sleep(1)
         print("VOLTE SEMPRE!")
-
 
     else:
         print(menu_invalido)
