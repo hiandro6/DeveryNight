@@ -1,0 +1,42 @@
+ARQUIVO_CLIENTES = "clientes.txt"
+
+clientes = {}
+
+
+menu_clientes = """
+============================
+====== MÓDULO CLIENTES =====
+============================
+
+  [1] CADASTRAR CLIENTE
+  [2] EXIBIR DADOS DO CLIENTE
+  [3] ALTERAR DADOS DO CLIENTE
+  [4] EXCLUIR CLIENTE
+  [0] RETORNAR AO MENU PRINCIPAL
+
+"""
+
+
+post_cliente = """
+====================================
+=== CADASTRANDO DADOS DO CLIENTE ===
+====================================
+"""
+
+get_cliente = """
+====================================
+==== EXIBINDO DADOS DO CLIENTE =====
+====================================
+"""
+
+put_cliente = """
+====================================
+==== ALTERANDO DADOS DO CLIENTE ====
+====================================
+"""
+
+del_cliente = """
+====================================
+==== DELETANDO DADOS DO CLIENTE ====
+====================================
+"""
