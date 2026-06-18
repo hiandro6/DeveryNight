@@ -9,6 +9,75 @@ print("BEM VINDO AO DEVERY NIGHT, SEU SISTEMA DE GESTÃO PARA CONVÊNIENCIA")
 
 
 
+menu_principal = """
+============================
+======= DEVERY NIGHT =======
+============================
+
+  [1] MÓDULO PRODUTOS
+  [2] MÓDULO CLIENTES
+  [3] MÓDULO VENDAS
+  [4] MÓDULO RELATÓRIOS
+  [5] MÓDULO INFORMAÇÕES
+  [0] SAIR
+  
+"""
+
+
+
+
+menu_relatorios = """
+============================
+===== MÓDULO RELATÓRIOS ====
+============================
+
+  [1] LISTA GERAL DE PRODUTOS
+  [2] LISTA GERAL DE CLIENTES
+  [3] LISTA DE VALORES POR VENDA
+  [4] NÚMERO DE PRODUTOS VENDIDOS
+  [5] MÉDIA DE VALOR POR VENDA
+  [0] RETORNAR AO MENU PRINCIPAL
+
+"""
+
+menu_infos = """
+============================
+==== MÓDULO INFORMAÇÕES ====
+============================
+
+   ############################################
+   #  PROJETO DE GESTÃO DE UMA CONVENIÊNCIA   #
+   #                                          #
+   #  DESENVOLVIDO POR HIANDRO ALEX @hiandro6 #
+   #                                          #
+   #  LICENÇA PÚBLICA GERAL GNU               #
+   #  www.gnu.org/licenses/gpl.html           #
+   ############################################
+
+  [0] RETORNAR AO MENU PRINCIPAL
+
+"""
+
+menu_invalido = """
+============================
+====== OPÇÃO INVÁLIDA ======
+============================
+
+   ###############################################
+   #                                             #
+   # RETORNE AO MENU ANTERIOR E TENTE NOVAMENTE  #
+   #                                             #
+   ###############################################
+
+  [0]  RETORNAR AO MENU ANTERIOR
+
+"""
+
+
+
+
+
+
 try:
     arquivo = open(ARQUIVO_PRODUTOS,"r",encoding="utf-8")
     for linha in arquivo:
@@ -125,73 +194,6 @@ except FileNotFoundError:
 
     arquivo.close()
 
-menu_principal = """
-============================
-======= DEVERY NIGHT =======
-============================
-
-  [1] MÓDULO PRODUTOS
-  [2] MÓDULO CLIENTES
-  [3] MÓDULO VENDAS
-  [4] MÓDULO RELATÓRIOS
-  [5] MÓDULO INFORMAÇÕES
-  [0] SAIR
-  
-"""
-
-
-
-
-menu_relatorios = """
-============================
-===== MÓDULO RELATÓRIOS ====
-============================
-
-  [1] LISTA GERAL DE PRODUTOS
-  [2] LISTA GERAL DE CLIENTES
-  [3] LISTA DE VALORES POR VENDA
-  [4] NÚMERO DE PRODUTOS VENDIDOS
-  [5] MÉDIA DE VALOR POR VENDA
-  [0] RETORNAR AO MENU PRINCIPAL
-
-"""
-
-menu_infos = """
-============================
-==== MÓDULO INFORMAÇÕES ====
-============================
-
-   ############################################
-   #  PROJETO DE GESTÃO DE UMA CONVENIÊNCIA   #
-   #                                          #
-   #  DESENVOLVIDO POR HIANDRO ALEX @hiandro6 #
-   #                                          #
-   #  LICENÇA PÚBLICA GERAL GNU               #
-   #  www.gnu.org/licenses/gpl.html           #
-   ############################################
-
-  [0] RETORNAR AO MENU PRINCIPAL
-
-"""
-
-menu_invalido = """
-============================
-====== OPÇÃO INVÁLIDA ======
-============================
-
-   ###############################################
-   #                                             #
-   # RETORNE AO MENU ANTERIOR E TENTE NOVAMENTE  #
-   #                                             #
-   ###############################################
-
-  [0]  RETORNAR AO MENU ANTERIOR
-
-"""
-
-
-
-
 
 
 
@@ -244,9 +246,9 @@ while op_princ != "0":
             print(put_produto)
             cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
             if cod_produto in produtos:
-                nome = input("INFORME O NOME DO PRODUTO: ")
-                preco = float(input("INFORME O PREÇO DO PRODUTO: "))
-                categoria = input("INFORME A CATEGORIA DO PRODUTO: ")
+                nome = input("INFORME O NOVO NOME DO PRODUTO: ")
+                preco = float(input("INFORME O NOVO PREÇO DO PRODUTO: "))
+                categoria = input("INFORME A NOVA CATEGORIA DO PRODUTO: ")
                 produtos[cod_produto] = [nome, preco, categoria]
                 print("PROCESSANDO ALTERAÇÃO...")
                 sleep(1)
@@ -351,15 +353,15 @@ while op_princ != "0":
         op_venda = input("DIGITE SUA OPÇÃO: ")
         if op_venda == "1":
             print(post_venda)
-            vend_id = input("INFORME O ID DA VENDA: ")
-            vend_cli = input("INFORME O NOME DO CLIENTE: ")
+            vend_id = str(len(vendas) + 1)
+            cli_cpf = input("INFORME O CPF DO CLIENTE: ")
             comprou_mais = ""
             vend_produtos = []
             while comprou_mais != "N":
-                produto = input("INFORME O NOME DO PRODUTO VENDIDO: ")
-                qnt_produto = int(input(f"INFORME QUANTAS UNIDADES DE {produto} VOCÊ VENDEU PARA {vend_cli}: "))
-                vend_produtos.append([produto, qnt_produto])
-                comprou_mais = input(f"{vend_cli} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
+                prod_id = input("INFORME O ID DO PRODUTO VENDIDO: ")
+                qnt_produto = int(input(f"INFORME QUANTAS UNIDADES DE {produtos[prod_id][0]} VOCÊ VENDEU PARA {clientes[cli_cpf][0]}: "))
+                vend_produtos.append([produtos[prod_id][0], qnt_produto])
+                comprou_mais = input(f"{clientes[cli_cpf][0]} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
             print("PROCESSANDO...")
 
             sleep(1)
@@ -373,7 +375,7 @@ while op_princ != "0":
                         preco = produtos[cod][1]
                         vend_valor = (vend_valor + (preco * quantidade))
 
-            vendas[vend_id] = [vend_cli, vend_produtos, vend_valor]
+            vendas[vend_id] = [clientes[cli_cpf][0], vend_produtos, vend_valor]
             print("VENDA CADASTRADA COM SUCESSO!")
             print("vendas:", vendas)
 
