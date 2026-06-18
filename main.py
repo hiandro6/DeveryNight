@@ -396,16 +396,16 @@ while op_princ != "0":
 
         elif op_venda == "3":
             print(put_venda)
-            vend_id = input("INFORME O ID DA VENDA: ")
+            vend_id = input("INFORME O ID DA VENDA QUE VOCÊ DESEJA ALTERAR: ")
             if vend_id in vendas:
-                vend_cli = input("INFORME O NOME DO CLIENTE: ")
+                cli_cpf = input("INFORME O NOVO CPF DO CLIENTE: ")
                 comprou_mais = ""
                 vend_produtos = []
                 while comprou_mais != "N":
-                    produto = input("INFORME O NOME DO PRODUTO VENDIDO: ")
-                    qnt_produto = int(input(f"INFORME QUANTAS UNIDADES DE {produto} VOCÊ VENDEU PARA {vend_cli}: "))
-                    vend_produtos.append([produto, qnt_produto])
-                    comprou_mais = input(f"{vend_cli} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
+                    prod_id = input("INFORME O ID DO PRODUTO VENDIDO: ")
+                    qnt_produto = int(input(f"INFORME QUANTAS UNIDADES DE {produtos[prod_id][0]} VOCÊ VENDEU PARA {clientes[cli_cpf][0]}: "))
+                    vend_produtos.append([produtos[prod_id][0], qnt_produto])
+                    comprou_mais = input(f"{clientes[cli_cpf][0]} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
                 print("PROCESSANDO ALTERAÇÃO...")
                 sleep(1)
                 vend_valor = 0
