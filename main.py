@@ -83,13 +83,13 @@ try:
     for linha in arquivo:
         linha = linha.rstrip()
         campos = linha.split(";")
-        produtos[campos[0]] = [campos[1],float(campos[2]),campos[3]]
+        produtos[campos[0]] = [campos[1],float(campos[2]),bool(campos[3])]
     arquivo.close()
 except FileNotFoundError:
     produtos = {
-    '111': ["coca 0 lata", 8, "bebidas"],
-    '222': ["pipoca", 5, "lanches"],
-    '333': ["cigarro", 2, "tabacaria"]
+    '111': ["coca 0 lata", 8, "bebidas", True],
+    '222': ["pipoca", 5, "lanches", True],
+    '333': ["cigarro", 2, "tabacaria", True]
     }
     arquivo = open(ARQUIVO_PRODUTOS,"w",encoding="utf-8")
     for cod in produtos:
@@ -101,6 +101,8 @@ except FileNotFoundError:
             + str(produtos[cod][1])
             + ";"
             + produtos[cod][2]
+            + ";"
+            + str(produtos[cod][3])
             + "\n"
         )
     arquivo.close()
@@ -112,15 +114,15 @@ try:
     for linha in arquivo:
         linha = linha.rstrip()
         campos = linha.split(";")
-        clientes[campos[0]] = [campos[1],campos[2]]
+        clientes[campos[0]] = [campos[1],campos[2], campos[3]]
     arquivo.close()
 except FileNotFoundError:
     clientes = {
-    '123': ["Homer Simpson", "homer@springfield.com"],
-    '234': ["Marge Simpson", "marge@springfield.com"],
-    '345': ["Bart Simpson", "bart@springfield.com"],
-    '456': ["Lisa Simpson", "lisa@springfield.com"],
-    '678': ["Maggie Simpson", "maggie@springfield.com"]
+    '123': ["Homer Simpson", "homer@springfield.com", True],
+    '234': ["Marge Simpson", "marge@springfield.com", True],
+    '345': ["Bart Simpson", "bart@springfield.com", True],
+    '456': ["Lisa Simpson", "lisa@springfield.com", True],
+    '678': ["Maggie Simpson", "maggie@springfield.com", True]
     }
     arquivo = open(ARQUIVO_CLIENTES,"w",encoding="utf-8")
     for cpf in clientes:
@@ -130,6 +132,8 @@ except FileNotFoundError:
             + clientes[cpf][0]
             + ";"
             + clientes[cpf][1]
+            + ";"
+            + str(clientes[cpf][2])
             + "\n"
         )
     arquivo.close()
@@ -145,22 +149,22 @@ try:
         id_venda = campos[0]
         cliente = campos[1]
         valor = float(campos[3])
+        status = bool(campos[4])
 
         produtos_vendidos = []
         lista_produtos = campos[2].split("|")
         for produto in lista_produtos:
             dados = produto.split(",")
             produtos_vendidos.append([dados[0], int(dados[1])])
-
-        vendas[id_venda] = [cliente, produtos_vendidos, valor]
+        vendas[id_venda] = [cliente, produtos_vendidos, valor, status]
 
     arquivo.close()
 
 except FileNotFoundError:
 
     vendas = {
-        '01': ["Maico Jackson", [["coca 0 lata", 2], ["pipoca", 3]], 31],
-        '02': ["Rick Grimes", [["cigarro", 1]], 2]
+        '01': ["Maico Jackson", [["coca 0 lata", 2], ["pipoca", 3]], 31, True],
+        '02': ["Rick Grimes", [["cigarro", 1]], 2, True]
     }
 
     arquivo = open(ARQUIVO_VENDAS, "w", encoding="utf-8")
@@ -189,6 +193,8 @@ except FileNotFoundError:
             + texto_produtos
             + ";"
             + str(vendas[id_venda][2])
+            + ";"
+            + str(vendas[id_venda][3])
             + "\n"
         )
 
@@ -220,9 +226,10 @@ while op_princ != "0":
             nome = input("INFORME O NOME DO PRODUTO: ")
             preco = float(input("INFORME O PREÇO DO PRODUTO: "))
             categoria = input("INFORME A CATEGORIA DO PRODUTO: ")
+            status = True
             sleep(1)
             print("PROCESSANDO...")
-            produtos[cod_produto] = [nome, preco, categoria]
+            produtos[cod_produto] = [nome, preco, categoria, status]
             sleep(1)
             print("PRODUTO CADASTRADO COM SUCESSO!")
             print("produtos: ", produtos) #apenas para teste
@@ -249,7 +256,8 @@ while op_princ != "0":
                 nome = input("INFORME O NOVO NOME DO PRODUTO: ")
                 preco = float(input("INFORME O NOVO PREÇO DO PRODUTO: "))
                 categoria = input("INFORME A NOVA CATEGORIA DO PRODUTO: ")
-                produtos[cod_produto] = [nome, preco, categoria]
+                status = True
+                produtos[cod_produto] = [nome, preco, categoria, status]
                 print("PROCESSANDO ALTERAÇÃO...")
                 sleep(1)
                 print("DADOS DO PRODUTO ALTERADOS COM SUCESSO!")
@@ -288,9 +296,10 @@ while op_princ != "0":
             nome = input("INFORME O NOME DO CLIENTE: ")
             cpf = input("INFORME O CPF DO CLIENTE: ")
             email = input("INFORME O EMAIL DO CLIENTE: ")
+            status = True
             sleep(1)
             print("PROCESSANDO...")
-            clientes[cpf] = [nome, email]
+            clientes[cpf] = [nome, email, status]
             sleep(1)
             print("CLIENTE CADASTRADO COM SUCESSO!")
             print("todos os clientes: ", clientes) #apenas para testes
@@ -313,11 +322,12 @@ while op_princ != "0":
             print(put_cliente)
             cpf = input("INFORME O CPF DO CLIENTE: ")
             if cpf in clientes:
-                nome = input("INFORME O NOME DO CLIENTE: ")
-                email = input("INFORME O EMAIL DO CLIENTE: ")
+                nome = input("INFORME O NOVO NOME DO CLIENTE: ")
+                email = input("INFORME O NOVO EMAIL DO CLIENTE: ")
+                status = True
                 sleep(1)
                 print("PROCESSANDO ALTERAÇÃO...")
-                clientes[cpf] = [nome, email]
+                clientes[cpf] = [nome, email, status]
                 sleep(1)
                 print("DADOS DO CLIENTE ALTERADOS COM SUCESSO!")
                 print("todos os clientes: ", clientes) #apenas para testes
@@ -374,8 +384,8 @@ while op_princ != "0":
                     if produtos[cod][0] == nome_produto:
                         preco = produtos[cod][1]
                         vend_valor = (vend_valor + (preco * quantidade))
-
-            vendas[vend_id] = [clientes[cli_cpf][0], vend_produtos, vend_valor]
+            status = True
+            vendas[vend_id] = [clientes[cli_cpf][0], vend_produtos, vend_valor, status]
             print("VENDA CADASTRADA COM SUCESSO!")
             print("vendas:", vendas)
 
@@ -416,8 +426,8 @@ while op_princ != "0":
                         if produtos[cod][0] == nome_produto:
                             preco = produtos[cod][1]
                             vend_valor = (vend_valor + (preco * quantidade))
-
-                vendas[vend_id] = [vend_cli, vend_produtos, vend_valor]
+                status = True
+                vendas[vend_id] = [vend_cli, vend_produtos, vend_valor, status]
 
                 print("DADOS DA VENDA ALTERADOS COM SUCESSO!")
                 print("vendas", vendas) #apenas para testes
@@ -471,6 +481,8 @@ while op_princ != "0":
                 + str(produtos[cod][1])
                 + ";"
                 + produtos[cod][2]
+                + ";"
+                + str(produtos[cod][3])
                 + "\n"
             )
         arquivo.close()
@@ -486,6 +498,8 @@ while op_princ != "0":
                 + clientes[cpf][0]
                 + ";"
                 + clientes[cpf][1]
+                + ";"
+                + str(clientes[cpf][2])
                 + "\n"
             )
         arquivo.close()
@@ -513,6 +527,8 @@ while op_princ != "0":
                 + texto_produtos
                 + ";"
                 + str(vendas[id_venda][2])
+                + ";"
+                + str(vendas[id_venda][3])
                 + "\n"
             )
         arquivo.close()
