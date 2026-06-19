@@ -1,7 +1,7 @@
 from time import sleep
 from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto 
 from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data
-from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda
+from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda, salvar_vendas
 
 
 
@@ -537,7 +537,9 @@ while op_princ != "0":
 
 
 
-        arquivo = open(ARQUIVO_VENDAS, "w", encoding="utf-8")
+        salvar_vendas(ARQUIVO_VENDAS, vendas)
+        """
+        arquivo_vendas = open(ARQUIVO_VENDAS, "w", encoding="utf-8")
         for id_venda in vendas:
             texto_produtos = ""
             for produto in vendas[id_venda][1]:
@@ -550,7 +552,7 @@ while op_princ != "0":
                 )
 
             texto_produtos = texto_produtos.rstrip("|")
-            arquivo.write(
+            arquivo_vendas.write(
                 id_venda
                 + ";"
                 + vendas[id_venda][0]
@@ -564,7 +566,7 @@ while op_princ != "0":
                 + vendas[id_venda][4]
                 + "\n"
             )
-        arquivo.close()
+        arquivo_vendas.close()"""
 
         print("ENCERRANDO O SISTEMA...")
         sleep(1)

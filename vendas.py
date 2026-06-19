@@ -1,3 +1,34 @@
+def salvar_vendas(ARQUIVO_VENDAS, vendas):
+  arquivo_vendas = open(ARQUIVO_VENDAS, "w", encoding="utf-8")
+  for id_venda in vendas:
+      texto_produtos = ""
+      for produto in vendas[id_venda][1]:
+          texto_produtos = (
+              texto_produtos
+              + produto[0]
+              + ","
+              + str(produto[1])
+              + "|"
+          )
+
+      texto_produtos = texto_produtos.rstrip("|")
+      arquivo_vendas.write(
+          id_venda
+          + ";"
+          + vendas[id_venda][0]
+          + ";"
+          + texto_produtos
+          + ";"
+          + str(vendas[id_venda][2])
+          + ";"
+          + str(vendas[id_venda][3])
+          + ";"
+          + vendas[id_venda][4]
+          + "\n"
+      )
+  arquivo_vendas.close()
+  
+
 ARQUIVO_VENDAS = "vendas.txt"
 vendas = {}
 
