@@ -243,6 +243,7 @@ while op_princ != "0":
                 sleep(1)
                 print("PROCURANDO PRODUTO...")
                 if cod_produto in produtos:
+                    print("len:", len(produtos[cod_produto])) #apenas para testes
                     print(f""" 
                     CÓDIGO: {cod_produto}
                     NOME: {produtos[cod_produto][0]}
@@ -275,7 +276,10 @@ while op_princ != "0":
                     confirma = input("DESEJA MESMO EXCLUIR ESSE PRODUTO? [S/N]: ").upper()
                     if confirma == "S":
                         print("EXCLUINDO PRODUTO...")
-                        del produtos[cod_produto]
+                        print("todos os produtos:", produtos) #testes
+                        for i in produtos: #testes
+                            print(produtos[i])
+                        produtos[cod_produto][3] = False
                         sleep(1)
                         print("PRODUTO EXCLUIDO COM SUCESSO!")
                         print("produtos:", produtos) #apenas para testes
@@ -348,7 +352,7 @@ while op_princ != "0":
                     if confirma == "S":
                         sleep(1)
                         print("EXCLUINDO CLIENTE...")
-                        del clientes[cpf]
+                        clientes[cpf][2] = False
                         sleep(1)
                         print("CLIENTE EXCLUIDO COM SUCESSO!")
                         print("todos os clientes: ", clientes) #apenas para testes
@@ -450,7 +454,7 @@ while op_princ != "0":
                     if confirma == "S":
                         print("EXCLUINDO VENDA...")
                         sleep(1)
-                        del vendas[vend_id]
+                        vendas[vend_id][3] = False
                         print("VENDA EXCLUIDA COM SUCESSO!")
                     else: 
                         print("EXCLUSÃO CANCELADA!")
@@ -488,7 +492,7 @@ while op_princ != "0":
                 + ";"
                 + str(produtos[cod][1])
                 + ";"
-                + produtos[cod][2]
+                + str(produtos[cod][2])
                 + ";"
                 + str(produtos[cod][3])
                 + "\n"
