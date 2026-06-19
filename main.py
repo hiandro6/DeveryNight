@@ -1,6 +1,6 @@
 from time import sleep
 from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto 
-from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente 
+from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data
 from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda
 
 
@@ -76,7 +76,7 @@ menu_invalido = """
 
 
 
-
+#PRODUTOS:
 
 try:
     arquivo = open(ARQUIVO_PRODUTOS,"r",encoding="utf-8")
@@ -108,6 +108,7 @@ except FileNotFoundError:
     arquivo.close()
 
 
+#CLIENTES:
 
 try:
     arquivo = open(ARQUIVO_CLIENTES,"r",encoding="utf-8")
@@ -118,11 +119,11 @@ try:
     arquivo.close()
 except FileNotFoundError:
     clientes = {
-    '123': ["Homer Simpson", "homer@springfield.com", True],
-    '234': ["Marge Simpson", "marge@springfield.com", True],
-    '345': ["Bart Simpson", "bart@springfield.com", True],
-    '456': ["Lisa Simpson", "lisa@springfield.com", True],
-    '678': ["Maggie Simpson", "maggie@springfield.com", True]
+    '123': ["Homer Simpson", "homer@springfield.com", True, "1993-10-11"],
+    '234': ["Marge Simpson", "marge@springfield.com", True, "1999-12-25"],
+    '345': ["Bart Simpson", "bart@springfield.com", True, "2009-06-14"],
+    '456': ["Lisa Simpson", "lisa@springfield.com", True, "2011-01-21"],
+    '678': ["Maggie Simpson", "maggie@springfield.com", True, "2019-08-01"]
     }
     arquivo = open(ARQUIVO_CLIENTES,"w",encoding="utf-8")
     for cpf in clientes:
@@ -134,11 +135,14 @@ except FileNotFoundError:
             + clientes[cpf][1]
             + ";"
             + str(clientes[cpf][2])
+            + ";"
+            + clientes[cpf][3]
             + "\n"
         )
     arquivo.close()
 
 
+#VENDAS:
 
 try:
     arquivo = open(ARQUIVO_VENDAS, "r", encoding="utf-8")
@@ -307,9 +311,12 @@ while op_princ != "0":
                 cpf = input("INFORME O CPF DO CLIENTE: ")
                 email = input("INFORME O EMAIL DO CLIENTE: ")
                 status = True
+                nascimento = input("INFORME A DATA DE NASCIMENTO DO CLIENTE [DD/MM/AAAA]:")
+                nascimento = formatar_data(nascimento)
                 sleep(1)
                 print("PROCESSANDO...")
-                clientes[cpf] = [nome, email, status]
+
+                clientes[cpf] = [nome, email, status, nascimento]
                 sleep(1)
                 print("CLIENTE CADASTRADO COM SUCESSO!")
                 print("todos os clientes: ", clientes) #apenas para testes
@@ -324,7 +331,8 @@ while op_princ != "0":
                     print(f"""
                     NOME: {clientes[cpf][0]}
                     CPF: {cpf}
-                    EMAIL: {clientes[cpf][1]}""")
+                    EMAIL: {clientes[cpf][1]}
+                    NASCIMENTO: {clientes[cpf][3]}""")
                 else:
                     print("CLIENTE NÃO ENCONTRADO! ")
 
@@ -335,9 +343,11 @@ while op_princ != "0":
                     nome = input("INFORME O NOVO NOME DO CLIENTE: ")
                     email = input("INFORME O NOVO EMAIL DO CLIENTE: ")
                     status = True
+                    nascimento = input("INFORME A DATA DE NASCIMENTO DO CLIENTE [DD/MM/AAAA]:")
+                    nascimento = formatar_data(nascimento)
                     sleep(1)
                     print("PROCESSANDO ALTERAÇÃO...")
-                    clientes[cpf] = [nome, email, status]
+                    clientes[cpf] = [nome, email, status, nascimento]
                     sleep(1)
                     print("DADOS DO CLIENTE ALTERADOS COM SUCESSO!")
                     print("todos os clientes: ", clientes) #apenas para testes
@@ -512,6 +522,8 @@ while op_princ != "0":
                 + clientes[cpf][1]
                 + ";"
                 + str(clientes[cpf][2])
+                + ";"
+                + clientes[cpf][3]
                 + "\n"
             )
         arquivo.close()

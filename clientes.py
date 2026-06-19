@@ -1,3 +1,9 @@
+def formatar_data(data):
+  data = data.split("/")
+  data.reverse()
+  data = "-".join(data)
+  return data
+
 ARQUIVO_CLIENTES = "clientes.txt"
 
 clientes = {}
