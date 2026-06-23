@@ -1,3 +1,21 @@
+def salvar_produtos(ARQUIVO_PRODUTOS, produtos):
+  arquivo = open(ARQUIVO_PRODUTOS, "w", encoding="utf-8")
+  for cod in produtos:
+      arquivo.write(
+          cod
+          + ";"
+          + produtos[cod][0]
+          + ";"
+          + str(produtos[cod][1])
+          + ";"
+          + str(produtos[cod][2])
+          + ";"
+          + str(produtos[cod][3])
+          + "\n"
+      )
+  arquivo.close()
+
+
 ARQUIVO_PRODUTOS = "produtos.txt"
 produtos = {}
 

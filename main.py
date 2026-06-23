@@ -1,6 +1,6 @@
 from time import sleep
-from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto 
-from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data
+from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto, salvar_produtos
+from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data, salvar_clientes
 from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda, salvar_vendas
 
 
@@ -83,7 +83,7 @@ try:
     for linha in arquivo:
         linha = linha.rstrip()
         campos = linha.split(";")
-        produtos[campos[0]] = [campos[1],float(campos[2]),bool(campos[3])]
+        produtos[campos[0]] = [campos[1],float(campos[2]),campos[3], campos[4] == "True"]
     arquivo.close()
 except FileNotFoundError:
     produtos = {
@@ -115,7 +115,7 @@ try:
     for linha in arquivo:
         linha = linha.rstrip()
         campos = linha.split(";")
-        clientes[campos[0]] = [campos[1],campos[2], campos[3]]
+        clientes[campos[0]] = [campos[1],campos[2], campos[3] == "True", campos[4]]
     arquivo.close()
 except FileNotFoundError:
     clientes = {
@@ -499,8 +499,9 @@ while op_princ != "0":
         print(menu_infos)
 
     elif op_princ == "0":
-        arquivo = open(ARQUIVO_PRODUTOS, "w", encoding="utf-8")
 
+        salvar_produtos(ARQUIVO_PRODUTOS, produtos)
+        """arquivo = open(ARQUIVO_PRODUTOS, "w", encoding="utf-8")
         for cod in produtos:
             arquivo.write(
                 cod
@@ -514,11 +515,11 @@ while op_princ != "0":
                 + str(produtos[cod][3])
                 + "\n"
             )
-        arquivo.close()
+        arquivo.close()"""
 
 
-
-        arquivo = open(ARQUIVO_CLIENTES, "w", encoding="utf-8")
+        salvar_clientes(ARQUIVO_CLIENTES, clientes)
+        """arquivo = open(ARQUIVO_CLIENTES, "w", encoding="utf-8")
 
         for cpf in clientes:
             arquivo.write(
@@ -533,7 +534,7 @@ while op_princ != "0":
                 + clientes[cpf][3]
                 + "\n"
             )
-        arquivo.close()
+        arquivo.close()"""
 
 
 
