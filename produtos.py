@@ -1,3 +1,35 @@
+def load_produtos(ARQUIVO_PRODUTOS):
+  global produtos
+  try:
+      arquivo = open(ARQUIVO_PRODUTOS,"r",encoding="utf-8")
+      for linha in arquivo:
+          linha = linha.rstrip()
+          campos = linha.split(";")
+          produtos[campos[0]] = [campos[1],float(campos[2]),campos[3], campos[4] == "True"]
+      arquivo.close()
+  except FileNotFoundError:
+      produtos = {
+      '111': ["coca 0 lata", 8, "bebidas", True],
+      '222': ["pipoca", 5, "lanches", True],
+      '333': ["cigarro", 2, "tabacaria", True]
+      }
+      arquivo = open(ARQUIVO_PRODUTOS,"w",encoding="utf-8")
+      for cod in produtos:
+          arquivo.write(
+              cod
+              + ";"
+              + produtos[cod][0]
+              + ";"
+              + str(produtos[cod][1])
+              + ";"
+              + produtos[cod][2]
+              + ";"
+              + str(produtos[cod][3])
+              + "\n"
+          )
+      arquivo.close()
+
+
 def salvar_produtos(ARQUIVO_PRODUTOS, produtos):
   arquivo = open(ARQUIVO_PRODUTOS, "w", encoding="utf-8")
   for cod in produtos:

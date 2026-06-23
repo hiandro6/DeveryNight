@@ -21,6 +21,40 @@ def salvar_clientes(ARQUIVO_VENDAS, clientes):
       )
   arquivo.close()
 
+
+def load_clientes(ARQUIVO_CLIENTES):
+  global clientes
+  try:
+      arquivo = open(ARQUIVO_CLIENTES,"r",encoding="utf-8")
+      for linha in arquivo:
+          linha = linha.rstrip()
+          campos = linha.split(";")
+          clientes[campos[0]] = [campos[1],campos[2], campos[3] == "True", campos[4]]
+      arquivo.close()
+  except FileNotFoundError:
+      clientes = {
+      '123': ["Homer Simpson", "homer@springfield.com", True, "1993-10-11"],
+      '234': ["Marge Simpson", "marge@springfield.com", True, "1999-12-25"],
+      '345': ["Bart Simpson", "bart@springfield.com", True, "2009-06-14"],
+      '456': ["Lisa Simpson", "lisa@springfield.com", True, "2011-01-21"],
+      '678': ["Maggie Simpson", "maggie@springfield.com", True, "2019-08-01"]
+      }
+      arquivo = open(ARQUIVO_CLIENTES,"w",encoding="utf-8")
+      for cpf in clientes:
+          arquivo.write(
+              cpf
+              + ";"
+              + clientes[cpf][0]
+              + ";"
+              + clientes[cpf][1]
+              + ";"
+              + str(clientes[cpf][2])
+              + ";"
+              + clientes[cpf][3]
+              + "\n"
+          )
+      arquivo.close()
+
 ARQUIVO_CLIENTES = "clientes.txt"
 
 clientes = {}

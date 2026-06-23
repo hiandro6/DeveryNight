@@ -1,7 +1,7 @@
 from time import sleep
-from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto, salvar_produtos
-from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data, salvar_clientes
-from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda, salvar_vendas
+from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto, salvar_produtos, load_produtos
+from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data, salvar_clientes, load_clientes
+from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda, salvar_vendas, load_vendas
 
 
 
@@ -77,8 +77,9 @@ menu_invalido = """
 
 
 #PRODUTOS:
+load_produtos(ARQUIVO_PRODUTOS)
 
-try:
+"""try:
     arquivo = open(ARQUIVO_PRODUTOS,"r",encoding="utf-8")
     for linha in arquivo:
         linha = linha.rstrip()
@@ -105,12 +106,13 @@ except FileNotFoundError:
             + str(produtos[cod][3])
             + "\n"
         )
-    arquivo.close()
+    arquivo.close()"""
 
 
 #CLIENTES:
 
-try:
+load_clientes(ARQUIVO_CLIENTES)
+"""try:
     arquivo = open(ARQUIVO_CLIENTES,"r",encoding="utf-8")
     for linha in arquivo:
         linha = linha.rstrip()
@@ -139,12 +141,14 @@ except FileNotFoundError:
             + clientes[cpf][3]
             + "\n"
         )
-    arquivo.close()
+    arquivo.close()"""
 
 
 #VENDAS:
 
-try:
+load_vendas(ARQUIVO_VENDAS)
+
+"""try:
     arquivo = open(ARQUIVO_VENDAS, "r", encoding="utf-8")
     for linha in arquivo:
         linha = linha.rstrip()
@@ -205,7 +209,7 @@ except FileNotFoundError:
         )
 
     arquivo.close()
-
+"""
 
 
 
