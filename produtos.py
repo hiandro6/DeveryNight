@@ -83,6 +83,23 @@ def exibe_produto():
         print("PRODUTO NÃO ENCONTRADO!")
 
 
+def atualiza_produto():
+    global produtos, put_produto
+    print(put_produto)
+    cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
+    if cod_produto in produtos:
+        nome = input("INFORME O NOVO NOME DO PRODUTO: ")
+        preco = float(input("INFORME O NOVO PREÇO DO PRODUTO: "))
+        categoria = input("INFORME A NOVA CATEGORIA DO PRODUTO: ")
+        status = True
+        produtos[cod_produto] = [nome, preco, categoria, status]
+        print("PROCESSANDO ALTERAÇÃO...")
+        sleep(1)
+        print("DADOS DO PRODUTO ALTERADOS COM SUCESSO!")
+        print("produtos:", produtos) #apenas para testes
+    else:
+        print("PRODUTO NÃO ENCONTRADO")
+        
 
 ARQUIVO_PRODUTOS = "produtos.txt"
 produtos = {}

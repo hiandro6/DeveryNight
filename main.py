@@ -1,5 +1,5 @@
 from time import sleep
-from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto, salvar_produtos, load_produtos, cadastra_produto, exibe_produto
+from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto, salvar_produtos, load_produtos, cadastra_produto, exibe_produto, atualiza_produto
 from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data, salvar_clientes, load_clientes
 from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda, salvar_vendas, load_vendas
 
@@ -266,7 +266,8 @@ while op_princ != "0":
                     print("PRODUTO NÃO ENCONTRADO!")"""
 
             elif op_produto == "3":
-                print(put_produto)
+                atualiza_produto()
+                """print(put_produto)
                 cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
                 if cod_produto in produtos:
                     nome = input("INFORME O NOVO NOME DO PRODUTO: ")
@@ -279,7 +280,7 @@ while op_princ != "0":
                     print("DADOS DO PRODUTO ALTERADOS COM SUCESSO!")
                     print("produtos:", produtos) #apenas para testes
                 else:
-                    print("PRODUTO NÃO ENCONTRADO")
+                    print("PRODUTO NÃO ENCONTRADO")"""
 
             elif op_produto == "4":
                 print(del_produto)
