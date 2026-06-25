@@ -1,10 +1,13 @@
 from time import sleep
 
+
+
 def formatar_data(data):
   data = data.split("/")
   data.reverse()
   data = "-".join(data)
   return data
+
 
 def salvar_clientes(ARQUIVO_VENDAS, clientes):
   arquivo = open(ARQUIVO_CLIENTES, "w", encoding="utf-8")
@@ -93,7 +96,6 @@ def exibe_cliente():
         print("CLIENTE NÃO ENCONTRADO! ")
 
 
-
 def atualiza_cliente():
     global clientes, put_cliente
     print(put_cliente)
@@ -132,8 +134,9 @@ def deleta_cliente():
     else:
         print("CLIENTE NÃO ENCONTRADO! ")
 
-ARQUIVO_CLIENTES = "clientes.txt"
 
+
+ARQUIVO_CLIENTES = "clientes.txt"
 clientes = {}
 
 

@@ -1,5 +1,7 @@
 from time import sleep
 
+
+
 def load_produtos(ARQUIVO_PRODUTOS):
   global produtos
   try:

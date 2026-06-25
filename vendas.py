@@ -3,6 +3,8 @@ from clientes import formatar_data
 from produtos import produtos
 from clientes import clientes
 
+
+
 def salvar_vendas(ARQUIVO_VENDAS, vendas):
   arquivo_vendas = open(ARQUIVO_VENDAS, "w", encoding="utf-8")
   for id_venda in vendas:
@@ -33,6 +35,7 @@ def salvar_vendas(ARQUIVO_VENDAS, vendas):
       )
   arquivo_vendas.close()
   
+
 
 def load_vendas(ARQUIVO_VENDAS):
     global vendas
@@ -98,6 +101,8 @@ def load_vendas(ARQUIVO_VENDAS):
 
         arquivo.close()
 
+
+
 def cadastra_venda():
     global vendas, post_venda, produtos, clientes
     print(post_venda)
@@ -128,6 +133,7 @@ def cadastra_venda():
     vendas[vend_id] = [clientes[cli_cpf][0], vend_produtos, vend_valor, status, vend_data]
     print("VENDA CADASTRADA COM SUCESSO!")
     print("vendas:", vendas)
+
 
 
 def exibe_venda():
@@ -182,6 +188,8 @@ def atualiza_venda():
     else:
         print("VENDA NÃO ENCONTRADA!")
 
+
+
 def deleta_venda():
     global vendas, del_venda
     print(del_venda)
@@ -199,6 +207,9 @@ def deleta_venda():
         print("VENDA NÃO ENCONTRADA!")
 
 
+
+
+
 ARQUIVO_VENDAS = "vendas.txt"
 vendas = {}
 
@@ -214,7 +225,6 @@ menu_vendas = """
   [0] RETORNAR AO MENU PRINCIPAL
 
 """
-
 
 post_venda = """
 ====================================
