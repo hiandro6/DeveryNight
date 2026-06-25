@@ -1,7 +1,7 @@
 from time import sleep
 from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto, salvar_produtos, load_produtos, cadastra_produto, exibe_produto, atualiza_produto, deleta_produto
 from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data, salvar_clientes, load_clientes, cadastra_cliente, exibe_cliente, atualiza_cliente, deleta_cliente
-from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda, salvar_vendas, load_vendas
+from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda, salvar_vendas, load_vendas, cadastra_venda, exibe_venda, atualiza_venda, deleta_venda
 
 
 
@@ -398,7 +398,8 @@ while op_princ != "0":
             print(menu_vendas)
             op_venda = input("DIGITE SUA OPÇÃO: ")
             if op_venda == "1":
-                print(post_venda)
+                cadastra_venda()
+                """print(post_venda)
                 vend_id = str(len(vendas) + 1)
                 cli_cpf = input("INFORME O CPF DO CLIENTE: ")
                 vend_data = input("INFORME A DATA DA VENDA [DD/MM/AAAA]:")
@@ -425,26 +426,28 @@ while op_princ != "0":
                 status = True
                 vendas[vend_id] = [clientes[cli_cpf][0], vend_produtos, vend_valor, status, vend_data]
                 print("VENDA CADASTRADA COM SUCESSO!")
-                print("vendas:", vendas)
+                print("vendas:", vendas)"""
 
             elif op_venda == "2":
-                print(get_venda)
+                exibe_venda()
+                """print(get_venda)
                 vend_id = input("INFORME O ID DA VENDA: ")
                 print("PROCURANDO VENDA...")
                 sleep(1)
                 if vend_id in vendas:
-                    print(f"""
+                    print(f""
                     ID DA VENDA: {vend_id}
                     NOME DO CLIENTE: {vendas[vend_id][0]}
                     PRODUTOS VENDIDOS: {vendas[vend_id][1]}
                     VALOR TOTAL: R$ {vendas[vend_id][2]}
                     DATA DA VENDA:  {vendas[vend_id][4]}
-                    """)
+                    "")
                 else:
-                    print("VENDA NÃO ENCONTRADA!")
+                    print("VENDA NÃO ENCONTRADA!")"""
 
             elif op_venda == "3":
-                print(put_venda)
+                atualiza_venda()
+                """print(put_venda)
                 vend_id = input("INFORME O ID DA VENDA QUE VOCÊ DESEJA ALTERAR: ")
                 if vend_id in vendas:
                     cli_cpf = input("INFORME O NOVO CPF DO CLIENTE: ")
@@ -473,10 +476,11 @@ while op_princ != "0":
                     print("DADOS DA VENDA ALTERADOS COM SUCESSO!")
                     print("vendas", vendas) #apenas para testes
                 else:
-                    print("VENDA NÃO ENCONTRADA!")
+                    print("VENDA NÃO ENCONTRADA!")"""
 
             elif op_venda == "4":
-                print(del_venda)
+                deleta_venda()
+                """print(del_venda)
                 vend_id = input("INFORME O ID DA VENDA: ")
                 if vend_id in vendas:
                     confirma = input("DESEJA MESMO EXCLUIR ESSA VENDA? [S/N]: ").upper()
@@ -488,7 +492,7 @@ while op_princ != "0":
                     else: 
                         print("EXCLUSÃO CANCELADA!")
                 else:
-                    print("VENDA NÃO ENCONTRADA!")
+                    print("VENDA NÃO ENCONTRADA!")"""
 
 
             elif op_venda == "0":

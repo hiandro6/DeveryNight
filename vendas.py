@@ -1,3 +1,8 @@
+from time import sleep
+from clientes import formatar_data
+from produtos import produtos
+from clientes import clientes
+
 def salvar_vendas(ARQUIVO_VENDAS, vendas):
   arquivo_vendas = open(ARQUIVO_VENDAS, "w", encoding="utf-8")
   for id_venda in vendas:
@@ -92,6 +97,106 @@ def load_vendas(ARQUIVO_VENDAS):
             )
 
         arquivo.close()
+
+def cadastra_venda():
+    global vendas, post_venda, produtos, clientes
+    print(post_venda)
+    vend_id = str(len(vendas) + 1)
+    cli_cpf = input("INFORME O CPF DO CLIENTE: ")
+    vend_data = input("INFORME A DATA DA VENDA [DD/MM/AAAA]:")
+    vend_data = formatar_data(vend_data)
+    comprou_mais = ""
+    vend_produtos = []
+    while comprou_mais != "N":
+        prod_id = input("INFORME O ID DO PRODUTO VENDIDO: ")
+        qnt_produto = int(input(f"INFORME QUANTAS UNIDADES DE {produtos[prod_id][0]} VOCÊ VENDEU PARA {clientes[cli_cpf][0]}: "))
+        vend_produtos.append([produtos[prod_id][0], qnt_produto])
+        comprou_mais = input(f"{clientes[cli_cpf][0]} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
+    print("PROCESSANDO...")
+
+    sleep(1)
+
+    vend_valor = 0
+    for item_venda in vend_produtos:
+        nome_produto = item_venda[0]
+        quantidade = item_venda[1]
+        for cod in produtos:
+            if produtos[cod][0] == nome_produto:
+                preco = produtos[cod][1]
+                vend_valor = (vend_valor + (preco * quantidade))
+    status = True
+    vendas[vend_id] = [clientes[cli_cpf][0], vend_produtos, vend_valor, status, vend_data]
+    print("VENDA CADASTRADA COM SUCESSO!")
+    print("vendas:", vendas)
+
+
+def exibe_venda():
+    global vendas, get_venda
+    print(get_venda)
+    vend_id = input("INFORME O ID DA VENDA: ")
+    print("PROCURANDO VENDA...")
+    sleep(1)
+    if vend_id in vendas:
+        print(f"""
+        ID DA VENDA: {vend_id}
+        NOME DO CLIENTE: {vendas[vend_id][0]}
+        PRODUTOS VENDIDOS: {vendas[vend_id][1]}
+        VALOR TOTAL: R$ {vendas[vend_id][2]}
+        DATA DA VENDA:  {vendas[vend_id][4]}
+        """)
+    else:
+        print("VENDA NÃO ENCONTRADA!")
+
+
+
+def atualiza_venda():
+    global vendas, put_venda, produtos, clientes
+    print(put_venda)
+    vend_id = input("INFORME O ID DA VENDA QUE VOCÊ DESEJA ALTERAR: ")
+    if vend_id in vendas:
+        cli_cpf = input("INFORME O NOVO CPF DO CLIENTE: ")
+        comprou_mais = ""
+        vend_produtos = []
+        vend_data = input("INFORME A NOVA DATA DA VENDA [DD/MM/AAAA]:")
+        vend_data = formatar_data(vend_data)
+        while comprou_mais != "N":
+            prod_id = input("INFORME O ID DO PRODUTO VENDIDO: ")
+            qnt_produto = int(input(f"INFORME QUANTAS UNIDADES DE {produtos[prod_id][0]} VOCÊ VENDEU PARA {clientes[cli_cpf][0]}: "))
+            vend_produtos.append([produtos[prod_id][0], qnt_produto])
+            comprou_mais = input(f"{clientes[cli_cpf][0]} COMPROU ALGUMA OUTRA COISA NESSA VENDA? [S/N]: ").upper()
+        print("PROCESSANDO ALTERAÇÃO...")
+        sleep(1)
+        vend_valor = 0
+        for item_venda in vend_produtos:
+            nome_produto = item_venda[0]
+            quantidade = item_venda[1]
+            for cod in produtos:
+                if produtos[cod][0] == nome_produto:
+                    preco = produtos[cod][1]
+                    vend_valor = (vend_valor + (preco * quantidade))
+        status = True
+        vendas[vend_id] = [clientes[cli_cpf][0], vend_produtos, vend_valor, status, vend_data]
+
+        print("DADOS DA VENDA ALTERADOS COM SUCESSO!")
+        print("vendas", vendas) #apenas para testes
+    else:
+        print("VENDA NÃO ENCONTRADA!")
+
+def deleta_venda():
+    global vendas, del_venda
+    print(del_venda)
+    vend_id = input("INFORME O ID DA VENDA: ")
+    if vend_id in vendas:
+        confirma = input("DESEJA MESMO EXCLUIR ESSA VENDA? [S/N]: ").upper()
+        if confirma == "S":
+            print("EXCLUINDO VENDA...")
+            sleep(1)
+            vendas[vend_id][3] = False
+            print("VENDA EXCLUIDA COM SUCESSO!")
+        else: 
+            print("EXCLUSÃO CANCELADA!")
+    else:
+        print("VENDA NÃO ENCONTRADA!")
 
 
 ARQUIVO_VENDAS = "vendas.txt"
