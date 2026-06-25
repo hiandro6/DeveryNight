@@ -76,9 +76,61 @@ def cadastra_cliente():
     print("todos os clientes: ", clientes) #apenas para testes
 
 
+def exibe_cliente():
+    global clientes, get_cliente
+    print(get_cliente)
+    cpf = input("INFORME O CPF DO CLIENTE: ")
+    sleep(1)
+    print("PROCURANDO CLIENTE...")
+    sleep(1)
+    if cpf in clientes:
+        print(f"""
+        NOME: {clientes[cpf][0]}
+        CPF: {cpf}
+        EMAIL: {clientes[cpf][1]}
+        NASCIMENTO: {clientes[cpf][3]}""")
+    else:
+        print("CLIENTE NÃO ENCONTRADO! ")
 
 
 
+def atualiza_cliente():
+    global clientes, put_cliente
+    print(put_cliente)
+    cpf = input("INFORME O CPF DO CLIENTE: ")
+    if cpf in clientes:
+        nome = input("INFORME O NOVO NOME DO CLIENTE: ")
+        email = input("INFORME O NOVO EMAIL DO CLIENTE: ")
+        status = True
+        nascimento = input("INFORME A DATA DE NASCIMENTO DO CLIENTE [DD/MM/AAAA]:")
+        nascimento = formatar_data(nascimento)
+        sleep(1)
+        print("PROCESSANDO ALTERAÇÃO...")
+        clientes[cpf] = [nome, email, status, nascimento]
+        sleep(1)
+        print("DADOS DO CLIENTE ALTERADOS COM SUCESSO!")
+        print("todos os clientes: ", clientes) #apenas para testes
+    else:
+        print("CLIENTE NÃO ENCONTRADO")
+
+
+def deleta_cliente():
+    global clientes, del_clientes
+    print(del_cliente)
+    cpf = input("INFORME O CPF DO CLIENTE: ")
+    if cpf in clientes:
+        confirma = input("DESEJA MESMO EXCLUIR ESSE CLIENTE? [S/N]: ").upper()
+        if confirma == "S":
+            sleep(1)
+            print("EXCLUINDO CLIENTE...")
+            clientes[cpf][2] = False
+            sleep(1)
+            print("CLIENTE EXCLUIDO COM SUCESSO!")
+            print("todos os clientes: ", clientes) #apenas para testes
+        else:
+            print("EXCLUSÃO CANCELADA!")
+    else:
+        print("CLIENTE NÃO ENCONTRADO! ")
 
 ARQUIVO_CLIENTES = "clientes.txt"
 

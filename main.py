@@ -1,6 +1,6 @@
 from time import sleep
 from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto, salvar_produtos, load_produtos, cadastra_produto, exibe_produto, atualiza_produto, deleta_produto
-from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data, salvar_clientes, load_clientes, cadastra_cliente
+from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data, salvar_clientes, load_clientes, cadastra_cliente, exibe_cliente, atualiza_cliente, deleta_cliente
 from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda, salvar_vendas, load_vendas
 
 
@@ -333,22 +333,24 @@ while op_princ != "0":
                 print("todos os clientes: ", clientes) #apenas para testes"""
 
             elif op_cliente == "2":
-                print(get_cliente)
+                exibe_cliente()
+                """print(get_cliente)
                 cpf = input("INFORME O CPF DO CLIENTE: ")
                 sleep(1)
                 print("PROCURANDO CLIENTE...")
                 sleep(1)
                 if cpf in clientes:
-                    print(f"""
+                    print(f""
                     NOME: {clientes[cpf][0]}
                     CPF: {cpf}
                     EMAIL: {clientes[cpf][1]}
-                    NASCIMENTO: {clientes[cpf][3]}""")
+                    NASCIMENTO: {clientes[cpf][3]}"")
                 else:
-                    print("CLIENTE NÃO ENCONTRADO! ")
+                    print("CLIENTE NÃO ENCONTRADO! ")"""
 
             elif op_cliente == "3":
-                print(put_cliente)
+                atualiza_cliente()
+                """print(put_cliente)
                 cpf = input("INFORME O CPF DO CLIENTE: ")
                 if cpf in clientes:
                     nome = input("INFORME O NOVO NOME DO CLIENTE: ")
@@ -363,10 +365,11 @@ while op_princ != "0":
                     print("DADOS DO CLIENTE ALTERADOS COM SUCESSO!")
                     print("todos os clientes: ", clientes) #apenas para testes
                 else:
-                    print("CLIENTE NÃO ENCONTRADO")
+                    print("CLIENTE NÃO ENCONTRADO")"""
 
             elif op_cliente == "4":
-                print(del_cliente)
+                deleta_cliente()
+                """print(del_cliente)
                 cpf = input("INFORME O CPF DO CLIENTE: ")
                 if cpf in clientes:
                     confirma = input("DESEJA MESMO EXCLUIR ESSE CLIENTE? [S/N]: ").upper()
@@ -380,7 +383,7 @@ while op_princ != "0":
                     else:
                         print("EXCLUSÃO CANCELADA!")
                 else:
-                    print("CLIENTE NÃO ENCONTRADO! ")
+                    print("CLIENTE NÃO ENCONTRADO! ")"""
 
             elif op_cliente == "0":
                 print("de volta ao menu principal")
