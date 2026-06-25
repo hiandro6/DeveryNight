@@ -65,6 +65,25 @@ def cadastra_produto():
     print("PRODUTO CADASTRADO COM SUCESSO!")
 
 
+def exibe_produto():
+    global produtos, get_produto
+    print(get_produto)
+    cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
+    sleep(1)
+    print("PROCURANDO PRODUTO...")
+    if cod_produto in produtos:
+        print("len:", len(produtos[cod_produto])) #apenas para testes
+        print(f""" 
+        CÓDIGO: {cod_produto}
+        NOME: {produtos[cod_produto][0]}
+        PREÇO: {produtos[cod_produto][1]}
+        CATEGORIA: {produtos[cod_produto][2]}
+        """)
+    else:
+        print("PRODUTO NÃO ENCONTRADO!")
+
+
+
 ARQUIVO_PRODUTOS = "produtos.txt"
 produtos = {}
 

@@ -1,5 +1,5 @@
 from time import sleep
-from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto, salvar_produtos, load_produtos, cadastra_produto
+from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto, salvar_produtos, load_produtos, cadastra_produto, exibe_produto
 from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data, salvar_clientes, load_clientes
 from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda, salvar_vendas, load_vendas
 
@@ -249,20 +249,21 @@ while op_princ != "0":
                 print("produtos: ", produtos) #apenas para teste
 
             elif op_produto == "2":
-                print(get_produto)
+                exibe_produto()
+                """print(get_produto)
                 cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
                 sleep(1)
                 print("PROCURANDO PRODUTO...")
                 if cod_produto in produtos:
                     print("len:", len(produtos[cod_produto])) #apenas para testes
-                    print(f""" 
+                    print(f"" 
                     CÓDIGO: {cod_produto}
                     NOME: {produtos[cod_produto][0]}
                     PREÇO: {produtos[cod_produto][1]}
                     CATEGORIA: {produtos[cod_produto][2]}
-                    """)
+                    "")
                 else:
-                    print("PRODUTO NÃO ENCONTRADO!")
+                    print("PRODUTO NÃO ENCONTRADO!")"""
 
             elif op_produto == "3":
                 print(put_produto)
