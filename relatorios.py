@@ -12,7 +12,7 @@ def produtos_da_categoria():
         if v[3] and v[2] == categoria:
             existe = True
             break
-        
+
     if existe:
         for k , v in produtos.items():
             if v[3] and v[2] == categoria:
@@ -21,7 +21,20 @@ def produtos_da_categoria():
         print("NÃO TEMOS NENHUM PRODUTO DESSA CATEGORIA")    
 
 def produtos_valor_especifico():
-    print("em desenvolvimento")
+    val_min = float(input("QUAL O PREÇO MÍNIMO DOS PRODUTOS QUE VOCÊ QUER LISTAR?"))
+    val_max = float(input("QUAL O PREÇO MÁXIMO DOS PRODUTOS QUE VOCÊ QUER LISTAR?"))
+    existe = False
+    for k , v in produtos.items():
+        if v[3] and (v[1] >= val_min) and (v[1] <= val_max):
+            existe = True
+            break
+        
+    if existe:
+        for k , v in produtos.items():
+            if v[3] and (v[1] >= val_min) and (v[1] <= val_max):
+                print(f"| ID: {k} | NOME: {v[0]} | VALOR: {v[1]}R$ | CATEGORIA: {v[2]}")
+    else:
+        print("NÃO TEMOS NENHUM PRODUTO DENTRO DESSA FAIXA DE VALOR") 
 
 def total_produtos_vendidos():
     print("em desenvolvimento")

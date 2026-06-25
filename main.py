@@ -156,7 +156,7 @@ while op_princ != "0":
     elif op_princ == "4":
         op_relatorio = ""
         while op_relatorio != "0":
-            sleep(1)
+            sleep(2)
             print(menu_relatorios)
             op_relatorio = input("DIGITE SUA OPÇÃO: ")
             if op_relatorio == "1":
