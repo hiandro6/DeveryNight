@@ -1,5 +1,5 @@
 from time import sleep
-from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto, salvar_produtos, load_produtos
+from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto, salvar_produtos, load_produtos, cadastra_produto
 from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data, salvar_clientes, load_clientes
 from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda, salvar_vendas, load_vendas
 
@@ -234,7 +234,8 @@ while op_princ != "0":
             print(menu_produtos)
             op_produto = input("DIGITE SUA OPÇÃO: ")
             if op_produto == "1":
-                print(post_produto)
+                cadastra_produto()
+                """print(post_produto)
                 cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
                 nome = input("INFORME O NOME DO PRODUTO: ")
                 preco = float(input("INFORME O PREÇO DO PRODUTO: "))
@@ -244,7 +245,7 @@ while op_princ != "0":
                 print("PROCESSANDO...")
                 produtos[cod_produto] = [nome, preco, categoria, status]
                 sleep(1)
-                print("PRODUTO CADASTRADO COM SUCESSO!")
+                print("PRODUTO CADASTRADO COM SUCESSO!")"""
                 print("produtos: ", produtos) #apenas para teste
 
             elif op_produto == "2":

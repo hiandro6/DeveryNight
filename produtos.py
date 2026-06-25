@@ -1,3 +1,5 @@
+from time import sleep
+
 def load_produtos(ARQUIVO_PRODUTOS):
   global produtos
   try:
@@ -46,6 +48,21 @@ def salvar_produtos(ARQUIVO_PRODUTOS, produtos):
           + "\n"
       )
   arquivo.close()
+
+
+def cadastra_produto():
+    global post_produto, produtos
+    print(post_produto)
+    cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
+    nome = input("INFORME O NOME DO PRODUTO: ")
+    preco = float(input("INFORME O PREÇO DO PRODUTO: "))
+    categoria = input("INFORME A CATEGORIA DO PRODUTO: ")
+    status = True
+    sleep(1)
+    print("PROCESSANDO...")
+    produtos[cod_produto] = [nome, preco, categoria, status]
+    sleep(1)
+    print("PRODUTO CADASTRADO COM SUCESSO!")
 
 
 ARQUIVO_PRODUTOS = "produtos.txt"
