@@ -1,8 +1,24 @@
+from produtos import produtos
 def lista_produtos():
-    print("em desenvolvimento")
+    for k , v in produtos.items():
+        if v[3]:
+            print(f"| ID: {k} | NOME: {v[0]} | VALOR: {v[1]}R$ | CATEGORIA: {v[2]}")
+
 
 def produtos_da_categoria():
-    print("em desenvolvimento")
+    categoria = input("VOCÊ DESEJA VER OS PRODUTOS DE QUAL CATEGORIA?")
+    existe = False
+    for k , v in produtos.items():
+        if v[3] and v[2] == categoria:
+            existe = True
+            break
+        
+    if existe:
+        for k , v in produtos.items():
+            if v[3] and v[2] == categoria:
+                print(f"| ID: {k} | NOME: {v[0]} | VALOR: {v[1]}R$ | CATEGORIA: {v[2]}")
+    else:
+        print("NÃO TEMOS NENHUM PRODUTO DESSA CATEGORIA")    
 
 def produtos_valor_especifico():
     print("em desenvolvimento")
