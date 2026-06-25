@@ -1,6 +1,6 @@
 from time import sleep
-from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto, salvar_produtos, load_produtos, cadastra_produto, exibe_produto, atualiza_produto
-from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data, salvar_clientes, load_clientes
+from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto, salvar_produtos, load_produtos, cadastra_produto, exibe_produto, atualiza_produto, deleta_produto
+from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data, salvar_clientes, load_clientes, cadastra_cliente
 from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda, salvar_vendas, load_vendas
 
 
@@ -283,7 +283,8 @@ while op_princ != "0":
                     print("PRODUTO NÃO ENCONTRADO")"""
 
             elif op_produto == "4":
-                print(del_produto)
+                deleta_produto()
+                """print(del_produto)
                 cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
                 if cod_produto in produtos:
                     confirma = input("DESEJA MESMO EXCLUIR ESSE PRODUTO? [S/N]: ").upper()
@@ -299,7 +300,7 @@ while op_princ != "0":
                     else:
                         print("EXCLUSÃO CANCELADA")
                 else:
-                    print("PRODUTO NÃO ENCONTRADO!")
+                    print("PRODUTO NÃO ENCONTRADO!")"""
 
             elif op_produto == "0":
                 print("de volta ao menu principal")
@@ -315,7 +316,8 @@ while op_princ != "0":
             print(menu_clientes)
             op_cliente = input("DIGITE SUA OPÇÃO: ")
             if op_cliente == "1":
-                print(post_cliente)
+                cadastra_cliente()
+                """print(post_cliente)
                 nome = input("INFORME O NOME DO CLIENTE: ")
                 cpf = input("INFORME O CPF DO CLIENTE: ")
                 email = input("INFORME O EMAIL DO CLIENTE: ")
@@ -328,7 +330,7 @@ while op_princ != "0":
                 clientes[cpf] = [nome, email, status, nascimento]
                 sleep(1)
                 print("CLIENTE CADASTRADO COM SUCESSO!")
-                print("todos os clientes: ", clientes) #apenas para testes
+                print("todos os clientes: ", clientes) #apenas para testes"""
 
             elif op_cliente == "2":
                 print(get_cliente)

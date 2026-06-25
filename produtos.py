@@ -99,7 +99,29 @@ def atualiza_produto():
         print("produtos:", produtos) #apenas para testes
     else:
         print("PRODUTO NÃO ENCONTRADO")
-        
+
+
+def deleta_produto():
+    produtos, del_produto
+    print(del_produto)
+    cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
+    if cod_produto in produtos:
+        confirma = input("DESEJA MESMO EXCLUIR ESSE PRODUTO? [S/N]: ").upper()
+        if confirma == "S":
+            print("EXCLUINDO PRODUTO...")
+            print("todos os produtos:", produtos) #testes
+            for i in produtos: #testes
+                print(produtos[i])
+            produtos[cod_produto][3] = False
+            sleep(1)
+            print("PRODUTO EXCLUIDO COM SUCESSO!")
+            print("produtos:", produtos) #apenas para testes
+        else:
+            print("EXCLUSÃO CANCELADA")
+    else:
+        print("PRODUTO NÃO ENCONTRADO!")
+
+
 
 ARQUIVO_PRODUTOS = "produtos.txt"
 produtos = {}

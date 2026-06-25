@@ -1,3 +1,5 @@
+from time import sleep
+
 def formatar_data(data):
   data = data.split("/")
   data.reverse()
@@ -54,6 +56,29 @@ def load_clientes(ARQUIVO_CLIENTES):
               + "\n"
           )
       arquivo.close()
+
+
+def cadastra_cliente():
+    global clientes, post_cliente
+    print(post_cliente)
+    nome = input("INFORME O NOME DO CLIENTE: ")
+    cpf = input("INFORME O CPF DO CLIENTE: ")
+    email = input("INFORME O EMAIL DO CLIENTE: ")
+    status = True
+    nascimento = input("INFORME A DATA DE NASCIMENTO DO CLIENTE [DD/MM/AAAA]:")
+    nascimento = formatar_data(nascimento)
+    sleep(1)
+    print("PROCESSANDO...")
+
+    clientes[cpf] = [nome, email, status, nascimento]
+    sleep(1)
+    print("CLIENTE CADASTRADO COM SUCESSO!")
+    print("todos os clientes: ", clientes) #apenas para testes
+
+
+
+
+
 
 ARQUIVO_CLIENTES = "clientes.txt"
 
