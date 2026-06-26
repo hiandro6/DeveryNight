@@ -1,5 +1,6 @@
 from produtos import produtos
 from vendas import vendas
+from clientes import clientes
 def lista_produtos():
     for k , v in produtos.items():
         if v[3]:
@@ -47,6 +48,11 @@ def total_produtos_vendidos():
                 total_produtos += produto[1]
     print(f"o total de produtos vendidos nas {total_vendas} vendas realizadas foi {total_produtos}")
 
+
+def lista_clientes():
+    for k, v in clientes.items():
+        if v[2]:
+            print(f"| CPF: {k:16} | NOME: {v[0]:25} | EMAIL: {v[1]:25} | NASCIMENTO: {v[3]}")
 
 
 menu_relatorios = """
