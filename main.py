@@ -2,7 +2,7 @@ from time import sleep
 from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto, salvar_produtos, load_produtos, cadastra_produto, exibe_produto, atualiza_produto, deleta_produto
 from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data, salvar_clientes, load_clientes, cadastra_cliente, exibe_cliente, atualiza_cliente, deleta_cliente
 from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda, salvar_vendas, load_vendas, cadastra_venda, exibe_venda, atualiza_venda, deleta_venda
-from relatorios import menu_relatorios, lista_produtos, produtos_da_categoria, produtos_valor_especifico, total_produtos_vendidos, lista_clientes
+from relatorios import menu_relatorios, lista_produtos, produtos_da_categoria, produtos_valor_especifico, total_produtos_vendidos, lista_clientes, clientes_idade_especifica
 
 
 menu_principal = """
@@ -64,11 +64,11 @@ load_vendas(ARQUIVO_VENDAS)
 print("BEM VINDO AO DEVERY NIGHT, SEU SISTEMA DE GESTÃO PARA CONVÊNIENCIA")
 op_princ = ""
 while op_princ != "0":
-    sleep(1)
+    """sleep(1)"""
     print(menu_principal)
     op_princ = input("DIGITE SUA OPÇÃO: ")
     print("CARREGANDO...")
-    sleep(1)
+    """sleep(1)"""
 
 
 
@@ -77,7 +77,7 @@ while op_princ != "0":
     if op_princ == "1":
         op_produto = ""
         while op_produto != "0":
-            sleep(1)
+            """sleep(1)"""
             print(menu_produtos)
             op_produto = input("DIGITE SUA OPÇÃO: ")
 
@@ -104,7 +104,7 @@ while op_princ != "0":
     elif op_princ == "2":
         op_cliente = ""
         while op_cliente != "0":
-            sleep(1)
+            """sleep(1)"""
             print(menu_clientes)
             op_cliente = input("DIGITE SUA OPÇÃO: ")
 
@@ -173,6 +173,9 @@ while op_princ != "0":
             elif op_relatorio == "5":
                 lista_clientes()
 
+            elif op_relatorio == "6":
+                clientes_idade_especifica()
+
             elif op_relatorio == "0":
                 print("de volta ao menu principal")
 
@@ -190,7 +193,7 @@ while op_princ != "0":
         salvar_vendas(ARQUIVO_VENDAS, vendas)
 
         print("ENCERRANDO O SISTEMA...")
-        sleep(1)
+        """sleep(1)"""
         print("VOLTE SEMPRE!")
 
     else:

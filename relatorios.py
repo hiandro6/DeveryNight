@@ -1,6 +1,9 @@
 from produtos import produtos
 from vendas import vendas
 from clientes import clientes
+from datetime import datetime
+
+
 def lista_produtos():
     for k , v in produtos.items():
         if v[3]:
@@ -53,6 +56,29 @@ def lista_clientes():
     for k, v in clientes.items():
         if v[2]:
             print(f"| CPF: {k:16} | NOME: {v[0]:25} | EMAIL: {v[1]:25} | NASCIMENTO: {v[3]}")
+
+def descobre_idade(nascimento):
+    nascimento = datetime.strptime(nascimento, "%Y-%m-%d")
+    data_atual = datetime.today()
+    idade = data_atual.year - nascimento.year
+    if (data_atual.month, data_atual.day) < (nascimento.month, nascimento.day):
+        idade -= 1
+
+    return idade
+
+
+def clientes_idade_especifica():
+    idade_min = int(input("QUAL A IDADE MÍNIMA DOS CLIENTES QUE VOCÊ DESEJA LISTAR? "))
+    idade_max= int(input("QUAL A IDADE MÁXIMA DOS CLIENTES QUE VOCÊ DESEJA LISTAR? "))
+    existe = False
+    for k, v in clientes.items():
+        if v[2] and descobre_idade(v[3]) >= idade_min and descobre_idade(v[3]) <= idade_max:
+            existe = True
+            print(f"| CPF: {k:16} | NOME: {v[0]:25} | EMAIL: {v[1]:25} | NASCIMENTO: {v[3]}")
+    
+    if not existe:
+        print("NÃO ENCONTRAMOS NENHUM USUÁRIO COM ESSA IDADE")
+
 
 
 menu_relatorios = """
