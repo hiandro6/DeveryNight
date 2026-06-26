@@ -2,7 +2,7 @@ from time import sleep
 from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put_produto, post_produto, del_produto, salvar_produtos, load_produtos, cadastra_produto, exibe_produto, atualiza_produto, deleta_produto
 from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data, salvar_clientes, load_clientes, cadastra_cliente, exibe_cliente, atualiza_cliente, deleta_cliente
 from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda, salvar_vendas, load_vendas, cadastra_venda, exibe_venda, atualiza_venda, deleta_venda
-from relatorios import menu_relatorios, lista_produtos, produtos_da_categoria, produtos_valor_especifico, total_produtos_vendidos, lista_clientes, clientes_idade_especifica
+from relatorios import menu_relatorios, lista_produtos, produtos_da_categoria, produtos_valor_especifico, total_produtos_vendidos, lista_clientes, clientes_idade_especifica, clientes_mes_especifico
 
 
 menu_principal = """
@@ -175,6 +175,9 @@ while op_princ != "0":
 
             elif op_relatorio == "6":
                 clientes_idade_especifica()
+            
+            elif op_relatorio == "7":
+                clientes_mes_especifico()
 
             elif op_relatorio == "0":
                 print("de volta ao menu principal")

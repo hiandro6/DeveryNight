@@ -69,7 +69,7 @@ def descobre_idade(nascimento):
 
 def clientes_idade_especifica():
     idade_min = int(input("QUAL A IDADE MÍNIMA DOS CLIENTES QUE VOCÊ DESEJA LISTAR? "))
-    idade_max= int(input("QUAL A IDADE MÁXIMA DOS CLIENTES QUE VOCÊ DESEJA LISTAR? "))
+    idade_max = int(input("QUAL A IDADE MÁXIMA DOS CLIENTES QUE VOCÊ DESEJA LISTAR? "))
     existe = False
     for k, v in clientes.items():
         if v[2] and descobre_idade(v[3]) >= idade_min and descobre_idade(v[3]) <= idade_max:
@@ -77,9 +77,20 @@ def clientes_idade_especifica():
             print(f"| CPF: {k:16} | NOME: {v[0]:25} | EMAIL: {v[1]:25} | NASCIMENTO: {v[3]}")
     
     if not existe:
-        print("NÃO ENCONTRAMOS NENHUM USUÁRIO COM ESSA IDADE")
+        print("NÃO ENCONTRAMOS NENHUM CLIENTE COM ESSA IDADE")
 
-
+def clientes_mes_especifico():
+    mes = input("VOCÊ DESEJA LISTAR OS CLIENTES NASCIDOS EM QUE MÊS?")
+    existe = False
+    for k, v in clientes.items():
+        if v[2]:
+            nascimento = v[3].split("-")
+            if nascimento[1] == mes:
+                existe = True
+                print(f"| CPF: {k:16} | NOME: {v[0]:25} | EMAIL: {v[1]:25} | NASCIMENTO: {v[3]}")
+    if not existe:
+        print("NÃO ENCONTRAMOS NENHUM CLIENTE NASCIDO NESSE MÊS")
+    
 
 menu_relatorios = """
 ============================
