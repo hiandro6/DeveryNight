@@ -97,6 +97,8 @@ while op_princ != "0":
             elif op_produto == "0":
                 print("de volta ao menu principal")
 
+            else:
+                print(menu_invalido)
 
 
 
@@ -123,6 +125,9 @@ while op_princ != "0":
             elif op_cliente == "0":
                 print("de volta ao menu principal")
 
+            else:
+                print(menu_invalido)
+
 
 
 
@@ -147,6 +152,9 @@ while op_princ != "0":
 
             elif op_venda == "0":
                 print("de volta ao menu principal")
+
+            else:
+                print(menu_invalido)
 
 
 
@@ -184,6 +192,9 @@ while op_princ != "0":
 
             elif op_relatorio == "0":
                 print("de volta ao menu principal")
+
+            else:
+                print(menu_invalido)
 
 
 
