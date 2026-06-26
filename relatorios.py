@@ -1,4 +1,5 @@
 from produtos import produtos
+from vendas import vendas
 def lista_produtos():
     for k , v in produtos.items():
         if v[3]:
@@ -37,7 +38,14 @@ def produtos_valor_especifico():
         print("NÃO TEMOS NENHUM PRODUTO DENTRO DESSA FAIXA DE VALOR") 
 
 def total_produtos_vendidos():
-    print("em desenvolvimento")
+    total_vendas = 0
+    total_produtos = 0
+    for k, v in vendas.items():
+        if v[3]:
+            total_vendas += 1
+            for produto in v[1]:
+                total_produtos += produto[1]
+    print(f"o total de produtos vendidos nas {total_vendas} vendas realizadas foi {total_produtos}")
 
 
 
