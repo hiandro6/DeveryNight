@@ -114,12 +114,26 @@ def clientes_prefixo_nome():
 
 def lista_vendas():
     for k, v in vendas.items():
-        print("="*100)
-        print(f"ID DA VENDA: {k:4} | NOME DO CLIENTE: {v[0]:25}| VALOR TOTAL: R$ {v[2]:5} | DATA DA VENDA:  {v[4]}")
-        print("PRODUTOS VENDIDOS:")
-        for i in v[1]:
-            print(f" {i[1]}un x {i[0]}")
-        sleep(0.8)
+        if v[3]:
+            print("="*100)
+            print(f"ID DA VENDA: {k:4} | NOME DO CLIENTE: {v[0]:25}| VALOR TOTAL: R$ {v[2]:5} | DATA DA VENDA:  {v[4]}")
+            print("PRODUTOS VENDIDOS:")
+            for i in v[1]:
+                print(f" {i[1]}un x {i[0]}")
+            sleep(0.8)
+
+
+def media_valor_vendas():
+    valor_total = 0
+    quantidade = 0
+    for v in vendas.values():
+        if v[3]:
+            quantidade += 1
+            valor_total += v[2]
+
+    media = valor_total / quantidade
+    print(f"A MÉDIA DE VALOR DAS VENDAS REALIZADAS É DE {media}R$")
+
 
 menu_relatorios = """
 ============================
@@ -137,7 +151,7 @@ menu_relatorios = """
   [8]  CLIENTES CUJO NOME INICIA COM LETRA(S) ESPECÍFICA
 
   [9]  LISTA GERAL DE VENDAS
-  [10] MÉDIA DE VALOR POR VENDA
+  [10] MÉDIA DE VALOR DAS VENDAS REALIZADAS
   [11] VENDAS REALIZADAS EM UM MÊS ESPECÍFICO
   [12] VENDAS REALIZADAS POR UM CLIENTE ESPECÍFICO
 
