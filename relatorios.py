@@ -2,6 +2,7 @@ from produtos import produtos
 from vendas import vendas
 from clientes import clientes
 from datetime import datetime
+from time import sleep
 
 
 def lista_produtos():
@@ -52,6 +53,8 @@ def total_produtos_vendidos():
     print(f"o total de produtos vendidos nas {total_vendas} vendas realizadas foi {total_produtos}")
 
 
+
+
 def lista_clientes():
     for k, v in clientes.items():
         if v[2]:
@@ -79,6 +82,7 @@ def clientes_idade_especifica():
     if not existe:
         print("NÃO ENCONTRAMOS NENHUM CLIENTE COM ESSA IDADE")
 
+
 def clientes_mes_especifico():
     mes = input("VOCÊ DESEJA LISTAR OS CLIENTES NASCIDOS EM QUE MÊS? ")
     existe = False
@@ -90,6 +94,7 @@ def clientes_mes_especifico():
                 print(f"| CPF: {k:16} | NOME: {v[0]:25} | EMAIL: {v[1]:25} | NASCIMENTO: {v[3]}")
     if not existe:
         print("NÃO ENCONTRAMOS NENHUM CLIENTE NASCIDO NESSE MÊS")
+
 
 def clientes_prefixo_nome():
     prefixo = input("VOCÊ DESEJA LISTAR OS CLIENTES CUJO NOME INICIO COM? ").capitalize()
@@ -105,6 +110,17 @@ def clientes_prefixo_nome():
         print(f"NÃO ENCONTRAMOS NENHUM CLIENTE CUJO NOME INICIE COM {prefixo} ou {prefixo_nome}")
 
 
+
+
+def lista_vendas():
+    for k, v in vendas.items():
+        print("="*100)
+        print(f"ID DA VENDA: {k:4} | NOME DO CLIENTE: {v[0]:25}| VALOR TOTAL: R$ {v[2]:5} | DATA DA VENDA:  {v[4]}")
+        print("PRODUTOS VENDIDOS:")
+        for i in v[1]:
+            print(f" {i[1]}un x {i[0]}")
+        sleep(0.8)
+
 menu_relatorios = """
 ============================
 ===== MÓDULO RELATÓRIOS ====
@@ -118,7 +134,7 @@ menu_relatorios = """
   [5]  LISTA GERAL DE CLIENTES
   [6]  CLIENTES COM IDADE EM UM INTERVALO ESPECÍFICO
   [7]  CLIENTES NASCIDOS EM UM MÊS ESPECÍFICO
-  [8]  CLIENTES CUJO NOME INICIA COM UMA LETRA ESPECÍFICA
+  [8]  CLIENTES CUJO NOME INICIA COM LETRA(S) ESPECÍFICA
 
   [9]  LISTA GERAL DE VENDAS
   [10] MÉDIA DE VALOR POR VENDA
