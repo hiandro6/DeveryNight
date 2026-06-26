@@ -11,7 +11,7 @@ def lista_produtos():
 
 
 def produtos_da_categoria():
-    categoria = input("VOCÊ DESEJA VER OS PRODUTOS DE QUAL CATEGORIA?")
+    categoria = input("VOCÊ DESEJA VER OS PRODUTOS DE QUAL CATEGORIA? ")
     existe = False
     for k , v in produtos.items():
         if v[3] and v[2] == categoria:
@@ -26,8 +26,8 @@ def produtos_da_categoria():
         print("NÃO TEMOS NENHUM PRODUTO DESSA CATEGORIA")    
 
 def produtos_valor_especifico():
-    val_min = float(input("QUAL O PREÇO MÍNIMO DOS PRODUTOS QUE VOCÊ QUER LISTAR?"))
-    val_max = float(input("QUAL O PREÇO MÁXIMO DOS PRODUTOS QUE VOCÊ QUER LISTAR?"))
+    val_min = float(input("QUAL O PREÇO MÍNIMO DOS PRODUTOS QUE VOCÊ QUER LISTAR? "))
+    val_max = float(input("QUAL O PREÇO MÁXIMO DOS PRODUTOS QUE VOCÊ QUER LISTAR? "))
     existe = False
     for k , v in produtos.items():
         if v[3] and (v[1] >= val_min) and (v[1] <= val_max):
@@ -80,7 +80,7 @@ def clientes_idade_especifica():
         print("NÃO ENCONTRAMOS NENHUM CLIENTE COM ESSA IDADE")
 
 def clientes_mes_especifico():
-    mes = input("VOCÊ DESEJA LISTAR OS CLIENTES NASCIDOS EM QUE MÊS?")
+    mes = input("VOCÊ DESEJA LISTAR OS CLIENTES NASCIDOS EM QUE MÊS? ")
     existe = False
     for k, v in clientes.items():
         if v[2]:
@@ -90,7 +90,20 @@ def clientes_mes_especifico():
                 print(f"| CPF: {k:16} | NOME: {v[0]:25} | EMAIL: {v[1]:25} | NASCIMENTO: {v[3]}")
     if not existe:
         print("NÃO ENCONTRAMOS NENHUM CLIENTE NASCIDO NESSE MÊS")
-    
+
+def clientes_prefixo_nome():
+    prefixo = input("VOCÊ DESEJA LISTAR OS CLIENTES CUJO NOME INICIO COM? ").capitalize()
+    existe = False
+    for k, v in clientes.items():
+        if v[2]:
+            quantidade_letras = len(prefixo)
+            prefixo_nome = v[0][0:quantidade_letras].capitalize()
+            if prefixo_nome == prefixo:
+                existe = True
+                print(f"| CPF: {k:16} | NOME: {v[0]:25} | EMAIL: {v[1]:25} | NASCIMENTO: {v[3]}")
+    if not existe:
+        print(f"NÃO ENCONTRAMOS NENHUM CLIENTE CUJO NOME INICIE COM {prefixo} ou {prefixo_nome}")
+
 
 menu_relatorios = """
 ============================
