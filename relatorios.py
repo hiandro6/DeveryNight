@@ -135,6 +135,29 @@ def media_valor_vendas():
     print(f"A MÉDIA DE VALOR DAS VENDAS REALIZADAS É DE {media}R$")
 
 
+def vendas_mes_especifico():
+    mes_desejado = int(input("VOCÊ DESEJA LISTAR AS VENDAS REALIZADAS EM QUE MÊS? [ESCOLHA DE 1 A 12]"))
+    existe = False
+    for k, v in vendas.items():
+        if v[3]:
+            data_venda = v[4].split("-")
+            if mes_desejado == int(data_venda[1]):
+                existe = True
+                print("="*100)
+                print(f"ID DA VENDA: {k:4} | NOME DO CLIENTE: {v[0]:25}| VALOR TOTAL: R$ {v[2]:5} | DATA DA VENDA:  {v[4]}")
+                print("PRODUTOS VENDIDOS:")
+                for i in v[1]:
+                    print(f" {i[1]}un x {i[0]}")
+                sleep(0.8)
+    if not existe:
+        print(f"NÃO ENCONTRAMOS NENHUMA VENDA REALIZADA NESSE MÊS")
+
+
+
+def vendas_cliente_especifico():
+    pass
+
+
 menu_relatorios = """
 ============================
 ===== MÓDULO RELATÓRIOS ====
