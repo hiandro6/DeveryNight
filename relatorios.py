@@ -155,7 +155,20 @@ def vendas_mes_especifico():
 
 
 def vendas_cliente_especifico():
-    pass
+    cliente_cpf = input("INFORME O CPF DO CLIENTE QUE VOCÊ DESEJA LISTAR AS VENDAS REALIZADAS: ")
+    existe = False
+    for k, v in vendas.items():
+        if v[3]:
+            if v[0] == clientes[f"{cliente_cpf}"][0]:
+                existe = True
+                print("="*100)
+                print(f"ID DA VENDA: {k:4} | NOME DO CLIENTE: {v[0]:25}| VALOR TOTAL: R$ {v[2]:5} | DATA DA VENDA:  {v[4]}")
+                print("PRODUTOS VENDIDOS:")
+                for i in v[1]:
+                    print(f" {i[1]}un x {i[0]}")
+                sleep(0.8)
+    if not existe:
+        print(f"NÃO ENCONTRAMOS NENHUMA VENDA REALIZADA POR ESSE CLIENTE")
 
 
 menu_relatorios = """
