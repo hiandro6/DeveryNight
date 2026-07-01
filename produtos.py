@@ -1,4 +1,5 @@
 from time import sleep
+from utilidades import verifica_num
 
 
 
@@ -55,9 +56,21 @@ def salvar_produtos(ARQUIVO_PRODUTOS, produtos):
 def cadastra_produto():
     global post_produto, produtos
     print(post_produto)
-    cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
+    while True:
+        try:
+            cod_produto = int(input("INFORME O CÓDIGO DO PRODUTO: "))
+            break
+        except:
+            print("CÓDIGO INVÁLIDO, TENTE DIGITAR UM NÚMERO INTEIRO")
+    cod_produto = str(cod_produto)
     nome = input("INFORME O NOME DO PRODUTO: ")
-    preco = float(input("INFORME O PREÇO DO PRODUTO: "))
+    while True:
+        try:
+            preco = float(input("INFORME O PREÇO DO PRODUTO: "))
+            break
+        except:
+            print("PREÇO INVÁLIDO, TENTE NOVAMENTE")
+
     categoria = input("INFORME A CATEGORIA DO PRODUTO: ")
     status = True
     sleep(1)

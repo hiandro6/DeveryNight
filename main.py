@@ -4,7 +4,6 @@ from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put
 from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda, salvar_vendas, load_vendas, cadastra_venda, exibe_venda, atualiza_venda, deleta_venda
 from relatorios import menu_relatorios, lista_produtos, produtos_da_categoria, produtos_valor_especifico, total_produtos_vendidos, lista_clientes, clientes_idade_especifica, clientes_mes_especifico, clientes_prefixo_nome, lista_vendas, media_valor_vendas, vendas_mes_especifico, vendas_cliente_especifico
 
-
 menu_principal = """
 ============================
 ======= DEVERY NIGHT =======
@@ -95,7 +94,7 @@ while op_princ != "0":
                 deleta_produto()
 
             elif op_produto == "0":
-                print("de volta ao menu principal")
+                print("RETORNANDO AO MENU PRINCIPAL!")
 
             else:
                 print(menu_invalido)
@@ -123,7 +122,7 @@ while op_princ != "0":
                 deleta_cliente()
 
             elif op_cliente == "0":
-                print("de volta ao menu principal")
+                print("RETORNANDO AO MENU PRINCIPAL!")
 
             else:
                 print(menu_invalido)
@@ -151,7 +150,7 @@ while op_princ != "0":
                 deleta_venda()
 
             elif op_venda == "0":
-                print("de volta ao menu principal")
+                print("RETORNANDO AO MENU PRINCIPAL!")
 
             else:
                 print(menu_invalido)
@@ -203,7 +202,7 @@ while op_princ != "0":
                 vendas_cliente_especifico()
 
             elif op_relatorio == "0":
-                print("de volta ao menu principal")
+                print("RETORNANDO AO MENU PRINCIPAL!")
 
             else:
                 print(menu_invalido)
