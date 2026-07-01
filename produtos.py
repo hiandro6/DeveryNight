@@ -101,10 +101,20 @@ def exibe_produto():
 def atualiza_produto():
     global produtos, put_produto
     print(put_produto)
-    cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
+    while True:
+        try:
+            cod_produto = int(input("INFORME O CÓDIGO DO PRODUTO: "))
+            break
+        except:
+            print("CÓDIGO INVÁLIDO, TENTE DIGITAR UM NÚMERO INTEIRO")
     if cod_produto in produtos:
         nome = input("INFORME O NOVO NOME DO PRODUTO: ")
-        preco = float(input("INFORME O NOVO PREÇO DO PRODUTO: "))
+        while True:
+            try:
+                preco = float(input("INFORME O PREÇO DO PRODUTO: "))
+                break
+            except:
+                print("PREÇO INVÁLIDO, TENTE NOVAMENTE")
         categoria = input("INFORME A NOVA CATEGORIA DO PRODUTO: ")
         status = True
         produtos[cod_produto] = [nome, preco, categoria, status]
