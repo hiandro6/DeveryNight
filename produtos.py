@@ -107,6 +107,7 @@ def atualiza_produto():
             break
         except:
             print("CÓDIGO INVÁLIDO, TENTE DIGITAR UM NÚMERO INTEIRO")
+    cod_produto = str(cod_produto)
     if cod_produto in produtos:
         nome = input("INFORME O NOVO NOME DO PRODUTO: ")
         while True:
