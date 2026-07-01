@@ -1,5 +1,5 @@
 from time import sleep
-
+from utilidades import validar_cpf, validar_email
 
 
 def formatar_data(data):
@@ -65,8 +65,19 @@ def cadastra_cliente():
     global clientes, post_cliente
     print(post_cliente)
     nome = input("INFORME O NOME DO CLIENTE: ")
-    cpf = input("INFORME O CPF DO CLIENTE: ")
-    email = input("INFORME O EMAIL DO CLIENTE: ")
+    while True:
+        cpf = input("INFORME O CPF DO CLIENTE: ")
+        if validar_cpf(cpf):
+            break
+        else:
+            print("CPF INVÁLIDO")
+
+    while True:
+        email = input("INFORME O EMAIL DO CLIENTE: ")
+        if validar_email(email):
+            break
+        else:
+            print("EMAIL INVÁLIDO!")
     status = True
     nascimento = input("INFORME A DATA DE NASCIMENTO DO CLIENTE [DD/MM/AAAA]:")
     nascimento = formatar_data(nascimento)
