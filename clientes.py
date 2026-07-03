@@ -1,12 +1,7 @@
 from time import sleep
-from utilidades import validar_cpf, validar_email
+from utilidades import validar_cpf, validar_email, formatar_data, validar_data
 
 
-def formatar_data(data):
-  data = data.split("/")
-  data.reverse()
-  data = "-".join(data)
-  return data
 
 
 def salvar_clientes(ARQUIVO_VENDAS, clientes):
@@ -65,6 +60,7 @@ def cadastra_cliente():
     global clientes, post_cliente
     print(post_cliente)
     nome = input("INFORME O NOME DO CLIENTE: ")
+
     while True:
         cpf = input("INFORME O CPF DO CLIENTE: ")
         if validar_cpf(cpf):
@@ -78,10 +74,18 @@ def cadastra_cliente():
             break
         else:
             print("EMAIL INVÁLIDO!")
+
     status = True
-    nascimento = input("INFORME A DATA DE NASCIMENTO DO CLIENTE [DD/MM/AAAA]:")
-    nascimento = formatar_data(nascimento)
-    sleep(1)
+
+    while True:
+        nascimento = input("INFORME A DATA DE NASCIMENTO [DD/MM/AAAA]: ")
+        if validar_data(nascimento):
+            nascimento = formatar_data(nascimento)
+            break
+        else:
+            print("DATA INVÁLIDA!")
+
+
     print("PROCESSANDO...")
 
     clientes[cpf] = [nome, email, status, nascimento]
@@ -99,7 +103,7 @@ def exibe_cliente():
             break
         else:
             print("CPF INVÁLIDO")
-    sleep(1)
+
     print("PROCURANDO CLIENTE...")
     sleep(1)
     if cpf in clientes:
@@ -115,12 +119,14 @@ def exibe_cliente():
 def atualiza_cliente():
     global clientes, put_cliente
     print(put_cliente)
+
     while True:
         cpf = input("INFORME O CPF DO CLIENTE: ")
         if validar_cpf(cpf):
             break
         else:
             print("CPF INVÁLIDO")
+
     if cpf in clientes:
         nome = input("INFORME O NOVO NOME DO CLIENTE: ")
         while True:
@@ -130,8 +136,15 @@ def atualiza_cliente():
             else:
                 print("EMAIL INVÁLIDO!")
         status = True
-        nascimento = input("INFORME A DATA DE NASCIMENTO DO CLIENTE [DD/MM/AAAA]:")
-        nascimento = formatar_data(nascimento)
+
+        while True:
+            nascimento = input("INFORME A DATA DE NASCIMENTO [DD/MM/AAAA]: ")
+            if validar_data(nascimento):
+                nascimento = formatar_data(nascimento)
+                break
+            else:
+                print("DATA INVÁLIDA!")
+
         sleep(1)
         print("PROCESSANDO ALTERAÇÃO...")
         clientes[cpf] = [nome, email, status, nascimento]

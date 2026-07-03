@@ -1,3 +1,6 @@
+from datetime import datetime
+
+
 def validar_cpf(cpf):
     cpf = cpf.replace(".", "").replace("-", "").strip()
     if not cpf.isdigit():
@@ -21,3 +24,26 @@ def validar_email(email):
         return False
 
     return True
+
+
+
+def validar_data(data):
+    try:
+        data = datetime.strptime(data, "%d/%m/%Y")
+
+        if data > datetime.now():
+            return False
+
+        return True
+    except ValueError:
+        return False
+
+def formatar_data(data):
+    try:
+        data = data.split("/")
+        data.reverse()
+        data = "-".join(data)
+        return data
+    except:
+        print("DATA INVÁLIDA")
+        return False
