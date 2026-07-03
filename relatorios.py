@@ -107,7 +107,7 @@ def clientes_prefixo_nome():
                 existe = True
                 print(f"| CPF: {k:16} | NOME: {v[0]:25} | EMAIL: {v[1]:25} | NASCIMENTO: {v[3]}")
     if not existe:
-        print(f"NÃO ENCONTRAMOS NENHUM CLIENTE CUJO NOME INICIE COM {prefixo} ou {prefixo_nome}")
+        print(f"NÃO ENCONTRAMOS NENHUM CLIENTE CUJO NOME INICIE COM {prefixo} ")
 
 
 
