@@ -9,7 +9,7 @@ def lista_produtos():
     for k , v in produtos.items():
         if v[3]:
             print(f"| ID: {k} | NOME: {v[0]} | VALOR: {v[1]}R$ | CATEGORIA: {v[2]}")
-
+            sleep(0.7)
 
 def produtos_da_categoria():
     categoria = input("VOCÊ DESEJA VER OS PRODUTOS DE QUAL CATEGORIA? ")
@@ -23,8 +23,9 @@ def produtos_da_categoria():
         for k , v in produtos.items():
             if v[3] and v[2] == categoria:
                 print(f"| ID: {k} | NOME: {v[0]} | VALOR: {v[1]}R$ | CATEGORIA: {v[2]}")
+                sleep(0.7)
     else:
-        print("NÃO TEMOS NENHUM PRODUTO DESSA CATEGORIA")    
+        print("NÃO ENCONTRAMOS NENHUM PRODUTO DESSA CATEGORIA")    
 
 def produtos_valor_especifico():
     val_min = float(input("QUAL O PREÇO MÍNIMO DOS PRODUTOS QUE VOCÊ QUER LISTAR? "))
@@ -39,8 +40,10 @@ def produtos_valor_especifico():
         for k , v in produtos.items():
             if v[3] and (v[1] >= val_min) and (v[1] <= val_max):
                 print(f"| ID: {k} | NOME: {v[0]} | VALOR: {v[1]}R$ | CATEGORIA: {v[2]}")
+                sleep(0.7)
     else:
         print("NÃO TEMOS NENHUM PRODUTO DENTRO DESSA FAIXA DE VALOR") 
+
 
 def total_produtos_vendidos():
     total_vendas = 0
@@ -59,6 +62,7 @@ def lista_clientes():
     for k, v in clientes.items():
         if v[2]:
             print(f"| CPF: {k:16} | NOME: {v[0]:25} | EMAIL: {v[1]:25} | NASCIMENTO: {v[3]}")
+            sleep(0.7)
 
 def descobre_idade(nascimento):
     nascimento = datetime.strptime(nascimento, "%Y-%m-%d")
@@ -78,7 +82,7 @@ def clientes_idade_especifica():
         if v[2] and descobre_idade(v[3]) >= idade_min and descobre_idade(v[3]) <= idade_max:
             existe = True
             print(f"| CPF: {k:16} | NOME: {v[0]:25} | EMAIL: {v[1]:25} | NASCIMENTO: {v[3]}")
-    
+            sleep(0.7)
     if not existe:
         print("NÃO ENCONTRAMOS NENHUM CLIENTE COM ESSA IDADE")
 
@@ -92,6 +96,7 @@ def clientes_mes_especifico():
             if nascimento[1] == mes:
                 existe = True
                 print(f"| CPF: {k:16} | NOME: {v[0]:25} | EMAIL: {v[1]:25} | NASCIMENTO: {v[3]}")
+                sleep(0.7)
     if not existe:
         print("NÃO ENCONTRAMOS NENHUM CLIENTE NASCIDO NESSE MÊS")
 
@@ -106,6 +111,7 @@ def clientes_prefixo_nome():
             if prefixo_nome == prefixo:
                 existe = True
                 print(f"| CPF: {k:16} | NOME: {v[0]:25} | EMAIL: {v[1]:25} | NASCIMENTO: {v[3]}")
+                sleep(0.7)
     if not existe:
         print(f"NÃO ENCONTRAMOS NENHUM CLIENTE CUJO NOME INICIE COM {prefixo} ")
 
@@ -120,7 +126,7 @@ def lista_vendas():
             print("PRODUTOS VENDIDOS:")
             for i in v[1]:
                 print(f" {i[1]}un x {i[0]}")
-            sleep(0.8)
+            sleep(0.7)
 
 
 def media_valor_vendas():
@@ -148,7 +154,7 @@ def vendas_mes_especifico():
                 print("PRODUTOS VENDIDOS:")
                 for i in v[1]:
                     print(f" {i[1]}un x {i[0]}")
-                sleep(0.8)
+                sleep(0.7)
     if not existe:
         print(f"NÃO ENCONTRAMOS NENHUMA VENDA REALIZADA NESSE MÊS")
 
@@ -166,7 +172,7 @@ def vendas_cliente_especifico():
                 print("PRODUTOS VENDIDOS:")
                 for i in v[1]:
                     print(f" {i[1]}un x {i[0]}")
-                sleep(0.8)
+                sleep(0.7)
     if not existe:
         print(f"NÃO ENCONTRAMOS NENHUMA VENDA REALIZADA POR ESSE CLIENTE")
 
