@@ -3,7 +3,7 @@ from vendas import vendas
 from clientes import clientes
 from datetime import datetime
 from time import sleep
-
+from utilidades import validar_nome
 
 def lista_produtos():
     for k , v in produtos.items():
@@ -12,7 +12,12 @@ def lista_produtos():
             sleep(0.7)
 
 def produtos_da_categoria():
-    categoria = input("VOCÊ DESEJA VER OS PRODUTOS DE QUAL CATEGORIA? ")
+    while True:
+        categoria = input("VOCÊ DESEJA VER OS PRODUTOS DE QUAL CATEGORIA? ")
+        if validar_nome(categoria):
+            break
+        else:
+            print("CATEGORIA INVÁLIDA! NÃO UTILIZE NÚMEROS OU CARACTERES ESPECIAIS.")
     existe = False
     for k , v in produtos.items():
         if v[3] and v[2] == categoria:
@@ -28,8 +33,16 @@ def produtos_da_categoria():
         print("NÃO ENCONTRAMOS NENHUM PRODUTO DESSA CATEGORIA")    
 
 def produtos_valor_especifico():
-    val_min = float(input("QUAL O PREÇO MÍNIMO DOS PRODUTOS QUE VOCÊ QUER LISTAR? "))
-    val_max = float(input("QUAL O PREÇO MÁXIMO DOS PRODUTOS QUE VOCÊ QUER LISTAR? "))
+    while True:
+        try:
+            val_min = float(input("QUAL O PREÇO MÍNIMO DOS PRODUTOS QUE VOCÊ QUER LISTAR? "))
+            val_max = float(input("QUAL O PREÇO MÁXIMO DOS PRODUTOS QUE VOCÊ QUER LISTAR? "))
+            if val_min <= val_max and val_min >= 0:
+                break
+            else:
+                print("DIGITE VALORES VÁLIDOS")
+        except:
+            print("DIGITE VALORES VÁLIDOS")
     existe = False
     for k , v in produtos.items():
         if v[3] and (v[1] >= val_min) and (v[1] <= val_max):
@@ -64,6 +77,7 @@ def lista_clientes():
             print(f"| CPF: {k:16} | NOME: {v[0]:25} | EMAIL: {v[1]:25} | NASCIMENTO: {v[3]}")
             sleep(0.7)
 
+
 def descobre_idade(nascimento):
     nascimento = datetime.strptime(nascimento, "%Y-%m-%d")
     data_atual = datetime.today()
@@ -75,8 +89,16 @@ def descobre_idade(nascimento):
 
 
 def clientes_idade_especifica():
-    idade_min = int(input("QUAL A IDADE MÍNIMA DOS CLIENTES QUE VOCÊ DESEJA LISTAR? "))
-    idade_max = int(input("QUAL A IDADE MÁXIMA DOS CLIENTES QUE VOCÊ DESEJA LISTAR? "))
+    while True:
+        try:
+            idade_min = int(input("QUAL A IDADE MÍNIMA DOS CLIENTES QUE VOCÊ DESEJA LISTAR? "))
+            idade_max = int(input("QUAL A IDADE MÁXIMA DOS CLIENTES QUE VOCÊ DESEJA LISTAR? "))
+            if idade_min <= idade_max and idade_min >= 0:
+                break
+            else:
+                print("DIGITE IDADES VÁLIDAS")
+        except:
+            print("DIGITE IDADES VÁLIDAS")
     existe = False
     for k, v in clientes.items():
         if v[2] and descobre_idade(v[3]) >= idade_min and descobre_idade(v[3]) <= idade_max:
@@ -88,7 +110,20 @@ def clientes_idade_especifica():
 
 
 def clientes_mes_especifico():
-    mes = input("VOCÊ DESEJA LISTAR OS CLIENTES NASCIDOS EM QUE MÊS? ")
+    meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+    meses2 = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+    while True:
+        mes = input("VOCÊ DESEJA LISTAR OS CLIENTES NASCIDOS EM QUE MÊS? [EX: 06 OU JUNHO]: ").capitalize()
+        if mes in meses:
+            indice = meses.index(mes)
+            mes = meses2[indice]
+            break
+        elif mes in meses2:
+            break
+        else:
+            print("DIGITE UM MÊS VÁLIDO")
+
+        
     existe = False
     for k, v in clientes.items():
         if v[2]:
@@ -138,7 +173,7 @@ def media_valor_vendas():
             valor_total += v[2]
 
     media = valor_total / quantidade
-    print(f"A MÉDIA DE VALOR DAS VENDAS REALIZADAS É DE {media}R$")
+    print(f"A MÉDIA DE VALOR DAS {quantidade} VENDAS REALIZADAS É DE {media}R$")
 
 
 def vendas_mes_especifico():
