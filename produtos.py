@@ -1,4 +1,5 @@
 from time import sleep
+from utilidades import validar_nome
 
 
 
@@ -58,11 +59,19 @@ def cadastra_produto():
     while True:
         try:
             cod_produto = int(input("INFORME O CÓDIGO DO PRODUTO: "))
-            break
+            if str(cod_produto) not in produtos.keys():
+                break
+            else:
+                print("JÁ EXISTE UM PRODUTO COM ESSE CÓDIGO")
         except:
             print("CÓDIGO INVÁLIDO, TENTE DIGITAR UM NÚMERO INTEIRO")
     cod_produto = str(cod_produto)
-    nome = input("INFORME O NOME DO PRODUTO: ")
+    while True:
+        nome = input("INFORME O NOME DO PRODUTO: ")
+        if validar_nome(nome):
+            break
+        else:
+            print("NOME INVÁLIDO! NÃO UTILIZE NÚMEROS OU CARACTERES ESPECIAIS.")
     while True:
         try:
             preco = float(input("INFORME O PREÇO DO PRODUTO: "))
@@ -70,7 +79,12 @@ def cadastra_produto():
         except:
             print("PREÇO INVÁLIDO, TENTE NOVAMENTE")
 
-    categoria = input("INFORME A CATEGORIA DO PRODUTO: ")
+    while True:
+        categoria = input("INFORME A CATEGORIA DO PRODUTO: ")
+        if validar_nome(categoria):
+            break
+        else:
+            print("CATEGORIA INVÁLIDA! NÃO UTILIZE NÚMEROS OU CARACTERES ESPECIAIS.")
     status = True
     sleep(1)
     print("PROCESSANDO...")
@@ -82,11 +96,16 @@ def cadastra_produto():
 def exibe_produto():
     global produtos, get_produto
     print(get_produto)
-    cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
-    sleep(1)
+    while True:
+        try:
+            cod_produto = int(input("INFORME O CÓDIGO DO PRODUTO: "))
+            break
+        except:
+            print("CÓDIGO INVÁLIDO, TENTE DIGITAR UM NÚMERO INTEIRO")
+    cod_produto = str(cod_produto)
     print("PROCURANDO PRODUTO...")
+    sleep(1)
     if cod_produto in produtos:
-        print("len:", len(produtos[cod_produto])) #apenas para testes
         print(f""" 
         CÓDIGO: {cod_produto}
         NOME: {produtos[cod_produto][0]}
@@ -108,14 +127,25 @@ def atualiza_produto():
             print("CÓDIGO INVÁLIDO, TENTE DIGITAR UM NÚMERO INTEIRO")
     cod_produto = str(cod_produto)
     if cod_produto in produtos:
-        nome = input("INFORME O NOVO NOME DO PRODUTO: ")
+        while True:
+            nome = input("INFORME O NOVO NOME DO PRODUTO: ")
+            if validar_nome(nome):
+                break
+            else:
+                print("NOME INVÁLIDO! NÃO UTILIZE NÚMEROS OU CARACTERES ESPECIAIS.")
         while True:
             try:
-                preco = float(input("INFORME O PREÇO DO PRODUTO: "))
+                preco = float(input("INFORME O NOVO PREÇO DO PRODUTO: "))
                 break
             except:
                 print("PREÇO INVÁLIDO, TENTE NOVAMENTE")
-        categoria = input("INFORME A NOVA CATEGORIA DO PRODUTO: ")
+
+        while True:
+            categoria = input("INFORME A NOVA CATEGORIA DO PRODUTO: ")
+            if validar_nome(categoria):
+                break
+            else:
+                print("CATEGORIA INVÁLIDA! NÃO UTILIZE NÚMEROS OU CARACTERES ESPECIAIS.")
         status = True
         produtos[cod_produto] = [nome, preco, categoria, status]
         print("PROCESSANDO ALTERAÇÃO...")
@@ -129,7 +159,14 @@ def atualiza_produto():
 def deleta_produto():
     produtos, del_produto
     print(del_produto)
-    cod_produto = input("INFORME O CÓDIGO DO PRODUTO: ")
+    while True:
+        try:
+            cod_produto = int(input("INFORME O CÓDIGO DO PRODUTO: "))
+            break
+        except:
+            print("CÓDIGO INVÁLIDO, TENTE DIGITAR UM NÚMERO INTEIRO")
+    cod_produto = str(cod_produto)
+
     if cod_produto in produtos:
         confirma = input("DESEJA MESMO EXCLUIR ESSE PRODUTO? [S/N]: ").upper()
         if confirma == "S":
