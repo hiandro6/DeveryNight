@@ -1,5 +1,5 @@
 from time import sleep
-from utilidades import validar_cpf, validar_email, formatar_data, validar_data
+from utilidades import validar_cpf, validar_email, formatar_data, validar_data, validar_nome
 
 
 
@@ -33,11 +33,11 @@ def load_clientes(ARQUIVO_CLIENTES):
       arquivo.close()
   except FileNotFoundError:
       clientes = {
-      '123': ["Homer Simpson", "homer@springfield.com", True, "1993-10-11"],
-      '234': ["Marge Simpson", "marge@springfield.com", True, "1999-12-25"],
-      '345': ["Bart Simpson", "bart@springfield.com", True, "2009-06-14"],
-      '456': ["Lisa Simpson", "lisa@springfield.com", True, "2011-01-21"],
-      '678': ["Maggie Simpson", "maggie@springfield.com", True, "2019-08-01"]
+      '123.123.123-00': ["Homer Simpson", "homer@springfield.com", True, "1993-10-11"],
+      '234.234.234-00': ["Marge Simpson", "marge@springfield.com", True, "1999-12-25"],
+      '345.345.345-00': ["Bart Simpson", "bart@springfield.com", True, "2009-06-14"],
+      '456.456.456-00': ["Lisa Simpson", "lisa@springfield.com", True, "2011-01-21"],
+      '678.678.678-00': ["Maggie Simpson", "maggie@springfield.com", True, "2019-08-01"]
       }
       arquivo = open(ARQUIVO_CLIENTES,"w",encoding="utf-8")
       for cpf in clientes:
@@ -59,7 +59,12 @@ def load_clientes(ARQUIVO_CLIENTES):
 def cadastra_cliente():
     global clientes, post_cliente
     print(post_cliente)
-    nome = input("INFORME O NOME DO CLIENTE: ")
+    while True:
+        nome = input("INFORME O NOME DO CLIENTE: ")
+        if validar_nome(nome):
+            break
+        else:
+            print("NOME INVÁLIDO! NÃO UTILIZE NÚMEROS OU CARACTERES ESPECIAIS.")
 
     while True:
         cpf = input("INFORME O CPF DO CLIENTE: ")
@@ -128,9 +133,15 @@ def atualiza_cliente():
             print("CPF INVÁLIDO")
 
     if cpf in clientes:
-        nome = input("INFORME O NOVO NOME DO CLIENTE: ")
         while True:
-            email = input("INFORME O EMAIL DO CLIENTE: ")
+            nome = input("INFORME O NOVO NOME DO CLIENTE: ")
+            if validar_nome(nome):
+                break
+            else:
+                print("NOME INVÁLIDO! NÃO UTILIZE NÚMEROS OU CARACTERES ESPECIAIS.")
+
+        while True:
+            email = input("INFORME O NOVO EMAIL DO CLIENTE: ")
             if validar_email(email):
                 break
             else:

@@ -39,11 +39,19 @@ def validar_data(data):
         return False
 
 def formatar_data(data):
-    try:
-        data = data.split("/")
-        data.reverse()
-        data = "-".join(data)
-        return data
-    except:
-        print("DATA INVÁLIDA")
+    data = data.split("/")
+    data.reverse()
+    data = "-".join(data)
+    return data
+
+
+def validar_nome(nome):
+    nome = nome.strip()
+    if nome == "":
         return False
+
+    for caractere in nome:
+        if not (caractere.isalpha() or caractere.isspace()):
+            return False
+
+    return True
