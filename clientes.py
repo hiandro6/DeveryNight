@@ -93,7 +93,12 @@ def cadastra_cliente():
 def exibe_cliente():
     global clientes, get_cliente
     print(get_cliente)
-    cpf = input("INFORME O CPF DO CLIENTE: ")
+    while True:
+        cpf = input("INFORME O CPF DO CLIENTE: ")
+        if validar_cpf(cpf):
+            break
+        else:
+            print("CPF INVÁLIDO")
     sleep(1)
     print("PROCURANDO CLIENTE...")
     sleep(1)
@@ -110,10 +115,20 @@ def exibe_cliente():
 def atualiza_cliente():
     global clientes, put_cliente
     print(put_cliente)
-    cpf = input("INFORME O CPF DO CLIENTE: ")
+    while True:
+        cpf = input("INFORME O CPF DO CLIENTE: ")
+        if validar_cpf(cpf):
+            break
+        else:
+            print("CPF INVÁLIDO")
     if cpf in clientes:
         nome = input("INFORME O NOVO NOME DO CLIENTE: ")
-        email = input("INFORME O NOVO EMAIL DO CLIENTE: ")
+        while True:
+            email = input("INFORME O EMAIL DO CLIENTE: ")
+            if validar_email(email):
+                break
+            else:
+                print("EMAIL INVÁLIDO!")
         status = True
         nascimento = input("INFORME A DATA DE NASCIMENTO DO CLIENTE [DD/MM/AAAA]:")
         nascimento = formatar_data(nascimento)
@@ -130,7 +145,12 @@ def atualiza_cliente():
 def deleta_cliente():
     global clientes, del_clientes
     print(del_cliente)
-    cpf = input("INFORME O CPF DO CLIENTE: ")
+    while True:
+        cpf = input("INFORME O CPF DO CLIENTE: ")
+        if validar_cpf(cpf):
+            break
+        else:
+            print("CPF INVÁLIDO")
     if cpf in clientes:
         confirma = input("DESEJA MESMO EXCLUIR ESSE CLIENTE? [S/N]: ").upper()
         if confirma == "S":
