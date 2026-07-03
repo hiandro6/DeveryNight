@@ -55,3 +55,38 @@ def validar_nome(nome):
             return False
 
     return True
+
+
+def menu_invalido():
+    print("""
+============================
+====== OPÇÃO INVÁLIDA ======
+============================
+
+   ###############################################
+   #                                             #
+   # RETORNE AO MENU ANTERIOR E TENTE NOVAMENTE  #
+   #                                             #
+   ###############################################
+
+""")
+    input("PRESSIONE ENTER PARA CONTINUAR... ")
+
+
+def menu_infos():
+    print("""
+============================
+==== MÓDULO INFORMAÇÕES ====
+============================
+
+   ############################################
+   #  PROJETO DE GESTÃO DE UMA CONVENIÊNCIA   #
+   #                                          #
+   #  DESENVOLVIDO POR HIANDRO ALEX @hiandro6 #
+   #                                          #
+   #  LICENÇA PÚBLICA GERAL GNU               #
+   #  www.gnu.org/licenses/gpl.html           #
+   ############################################
+
+""")
+    input("PRESSIONE ENTER PARA RETORNAR AO MENU ANTERIOR... ")

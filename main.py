@@ -3,6 +3,7 @@ from produtos import produtos, ARQUIVO_PRODUTOS, menu_produtos, get_produto, put
 from clientes import clientes, ARQUIVO_CLIENTES, menu_clientes, get_cliente, put_cliente, post_cliente, del_cliente, formatar_data, salvar_clientes, load_clientes, cadastra_cliente, exibe_cliente, atualiza_cliente, deleta_cliente
 from vendas import vendas, ARQUIVO_VENDAS, menu_vendas, get_venda, put_venda, post_venda, del_venda, salvar_vendas, load_vendas, cadastra_venda, exibe_venda, atualiza_venda, deleta_venda
 from relatorios import menu_relatorios, lista_produtos, produtos_da_categoria, produtos_valor_especifico, total_produtos_vendidos, lista_clientes, clientes_idade_especifica, clientes_mes_especifico, clientes_prefixo_nome, lista_vendas, media_valor_vendas, vendas_mes_especifico, vendas_cliente_especifico
+from utilidades import menu_invalido, menu_infos
 
 menu_principal = """
 ============================
@@ -19,38 +20,6 @@ menu_principal = """
 """
 
 
-menu_infos = """
-============================
-==== MÓDULO INFORMAÇÕES ====
-============================
-
-   ############################################
-   #  PROJETO DE GESTÃO DE UMA CONVENIÊNCIA   #
-   #                                          #
-   #  DESENVOLVIDO POR HIANDRO ALEX @hiandro6 #
-   #                                          #
-   #  LICENÇA PÚBLICA GERAL GNU               #
-   #  www.gnu.org/licenses/gpl.html           #
-   ############################################
-
-  [0] RETORNAR AO MENU PRINCIPAL
-
-"""
-
-menu_invalido = """
-============================
-====== OPÇÃO INVÁLIDA ======
-============================
-
-   ###############################################
-   #                                             #
-   # RETORNE AO MENU ANTERIOR E TENTE NOVAMENTE  #
-   #                                             #
-   ###############################################
-
-  [0]  RETORNAR AO MENU ANTERIOR
-
-"""
 
 
 #RECUPERANDO ARQUIVOS TXT:
@@ -68,7 +37,6 @@ while op_princ != "0":
     op_princ = input("DIGITE SUA OPÇÃO: ")
     print("CARREGANDO...")
     """sleep(1)"""
-
 
 
 
@@ -97,7 +65,7 @@ while op_princ != "0":
                 print("RETORNANDO AO MENU PRINCIPAL!")
 
             else:
-                print(menu_invalido)
+                menu_invalido()
 
 
 
@@ -125,7 +93,7 @@ while op_princ != "0":
                 print("RETORNANDO AO MENU PRINCIPAL!")
 
             else:
-                print(menu_invalido)
+                menu_invalido()
 
 
 
@@ -153,7 +121,7 @@ while op_princ != "0":
                 print("RETORNANDO AO MENU PRINCIPAL!")
 
             else:
-                print(menu_invalido)
+                menu_invalido()
 
 
 
@@ -205,7 +173,7 @@ while op_princ != "0":
                 print("RETORNANDO AO MENU PRINCIPAL!")
 
             else:
-                print(menu_invalido)
+                menu_invalido()
 
 
 
@@ -225,4 +193,4 @@ while op_princ != "0":
         print("VOLTE SEMPRE!")
 
     else:
-        print(menu_invalido)
+        menu_invalido()
