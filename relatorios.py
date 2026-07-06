@@ -3,7 +3,7 @@ from vendas import vendas
 from clientes import clientes
 from datetime import datetime
 from time import sleep
-from utilidades import validar_nome
+from utilidades import validar_nome, validar_cpf
 
 def lista_produtos():
     for k , v in produtos.items():
@@ -137,7 +137,13 @@ def clientes_mes_especifico():
 
 
 def clientes_prefixo_nome():
-    prefixo = input("VOCÊ DESEJA LISTAR OS CLIENTES CUJO NOME INICIO COM? ").capitalize()
+    while True:
+        prefixo = input("VOCÊ DESEJA LISTAR OS CLIENTES CUJO NOME INICIO COM? ").capitalize()
+        if validar_nome(prefixo):
+            break
+        else:
+            print("NOME INVÁLIDO! NÃO UTILIZE NÚMEROS OU CARACTERES ESPECIAIS.")
+
     existe = False
     for k, v in clientes.items():
         if v[2]:
@@ -177,12 +183,25 @@ def media_valor_vendas():
 
 
 def vendas_mes_especifico():
-    mes_desejado = int(input("VOCÊ DESEJA LISTAR AS VENDAS REALIZADAS EM QUE MÊS? [ESCOLHA DE 1 A 12]"))
+    meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
+    meses2 = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
+    
+    while True:
+        mes_desejado = input("VOCÊ DESEJA LISTAR AS VENDAS REALIZADAS EM QUE MÊS? [ESCOLHA DE 1 A 12]").capitalize()
+        if mes_desejado in meses:
+            indice = meses.index(mes_desejado)
+            mes_desejado = meses2[indice]
+            break
+        elif mes_desejado in meses2:
+            break
+        else:
+            print("DIGITE UM MÊS VÁLIDO")
+
     existe = False
     for k, v in vendas.items():
         if v[3]:
             data_venda = v[4].split("-")
-            if mes_desejado == int(data_venda[1]):
+            if mes_desejado == data_venda[1]:
                 existe = True
                 print("="*100)
                 print(f"ID DA VENDA: {k:4} | NOME DO CLIENTE: {v[0]:25}| VALOR TOTAL: R$ {v[2]:5} | DATA DA VENDA:  {v[4]}")
@@ -196,7 +215,15 @@ def vendas_mes_especifico():
 
 
 def vendas_cliente_especifico():
-    cliente_cpf = input("INFORME O CPF DO CLIENTE QUE VOCÊ DESEJA LISTAR AS VENDAS REALIZADAS: ")
+    while True:
+        cliente_cpf = input("INFORME O CPF DO CLIENTE QUE VOCÊ DESEJA LISTAR AS VENDAS REALIZADAS: ")
+        if validar_cpf(cliente_cpf):
+            if cliente_cpf in clientes.keys():
+                break
+            else:
+                print("CPF NÃO CADASTRADO NO NOSSO BANCO DE CLIENTES")
+        else:
+            print("DIGITE UM CPF VÁLIDO")
     existe = False
     for k, v in vendas.items():
         if v[3]:
