@@ -67,7 +67,7 @@ def cadastra_cliente():
             print("NOME INVÁLIDO! NÃO UTILIZE NÚMEROS OU CARACTERES ESPECIAIS.")
 
     while True:
-        cpf = input("INFORME O CPF DO CLIENTE: ")
+        cpf = input("INFORME O CPF DO CLIENTE [XXX.XXX.XXX-XX]: ")
         if validar_cpf(cpf):
             break
         else:
@@ -103,7 +103,7 @@ def exibe_cliente():
     global clientes, get_cliente
     print(get_cliente)
     while True:
-        cpf = input("INFORME O CPF DO CLIENTE: ")
+        cpf = input("INFORME O CPF DO CLIENTE [XXX.XXX.XXX-XX]: ")
         if validar_cpf(cpf):
             break
         else:
@@ -126,7 +126,7 @@ def atualiza_cliente():
     print(put_cliente)
 
     while True:
-        cpf = input("INFORME O CPF DO CLIENTE: ")
+        cpf = input("INFORME O CPF DO CLIENTE [XXX.XXX.XXX-XX]: ")
         if validar_cpf(cpf):
             break
         else:
@@ -170,7 +170,7 @@ def deleta_cliente():
     global clientes, del_clientes
     print(del_cliente)
     while True:
-        cpf = input("INFORME O CPF DO CLIENTE: ")
+        cpf = input("INFORME O CPF DO CLIENTE [XXX.XXX.XXX-XX]: ")
         if validar_cpf(cpf):
             break
         else:

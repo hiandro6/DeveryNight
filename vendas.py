@@ -109,7 +109,7 @@ def cadastra_venda():
     vend_id = str(len(vendas) + 1)
 
     while True:
-        cli_cpf = input("INFORME O CPF DO CLIENTE: ")
+        cli_cpf = input("INFORME O CPF DO CLIENTE [XXX.XXX.XXX-XX]: ")
         if validar_cpf(cli_cpf):
             if cli_cpf in clientes.keys():
                 break
@@ -206,7 +206,7 @@ def atualiza_venda():
 
     if vend_id in vendas:
         while True:
-            cli_cpf = input("INFORME O NOVO CPF DO CLIENTE: ")
+            cli_cpf = input("INFORME O NOVO CPF DO CLIENTE: [XXX.XXX.XXX-XX]")
             if validar_cpf(cli_cpf):
                 if cli_cpf in clientes.keys():
                     break

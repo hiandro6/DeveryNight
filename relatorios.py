@@ -138,7 +138,7 @@ def clientes_mes_especifico():
 
 def clientes_prefixo_nome():
     while True:
-        prefixo = input("VOCÊ DESEJA LISTAR OS CLIENTES CUJO NOME INICIO COM? ").capitalize()
+        prefixo = input("VOCÊ DESEJA LISTAR OS CLIENTES CUJO NOME INICIA COM? ").capitalize()
         if validar_nome(prefixo):
             break
         else:
@@ -187,7 +187,7 @@ def vendas_mes_especifico():
     meses2 = ["01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12"]
     
     while True:
-        mes_desejado = input("VOCÊ DESEJA LISTAR AS VENDAS REALIZADAS EM QUE MÊS? [ESCOLHA DE 1 A 12]").capitalize()
+        mes_desejado = input("VOCÊ DESEJA LISTAR AS VENDAS REALIZADAS EM QUE MÊS? [ EX: DEZEMBRO OU 12]").capitalize()
         if mes_desejado in meses:
             indice = meses.index(mes_desejado)
             mes_desejado = meses2[indice]
@@ -216,7 +216,7 @@ def vendas_mes_especifico():
 
 def vendas_cliente_especifico():
     while True:
-        cliente_cpf = input("INFORME O CPF DO CLIENTE QUE VOCÊ DESEJA LISTAR AS VENDAS REALIZADAS: ")
+        cliente_cpf = input("INFORME O CPF DO CLIENTE QUE VOCÊ DESEJA LISTAR AS VENDAS REALIZADAS [XXX.XXX.XXX-XX]: ")
         if validar_cpf(cliente_cpf):
             if cliente_cpf in clientes.keys():
                 break
