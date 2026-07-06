@@ -180,7 +180,7 @@ while op_princ != "0":
 
 #informações:
     elif op_princ == "5":
-        print(menu_infos)
+        menu_infos()
 
     elif op_princ == "0":
         #GRAVANDO NOS ARQUIVOS.TXT
