@@ -69,7 +69,10 @@ def cadastra_cliente():
     while True:
         cpf = input("INFORME O CPF DO CLIENTE [XXX.XXX.XXX-XX]: ")
         if validar_cpf(cpf):
-            break
+            if cpf not in clientes.keys():
+                break
+            else:
+                print("JÁ EXISTE UM CLIENTE COM ESSE CPF")
         else:
             print("CPF INVÁLIDO")
 
