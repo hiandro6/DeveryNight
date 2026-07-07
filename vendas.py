@@ -263,7 +263,6 @@ def atualiza_venda():
         vendas[vend_id] = [clientes[cli_cpf][0], vend_produtos, vend_valor, status, vend_data]
 
         print("DADOS DA VENDA ALTERADOS COM SUCESSO!")
-        print("vendas", vendas) #apenas para testes
     else:
         print("VENDA NÃO ENCONTRADA!")
 

@@ -99,7 +99,6 @@ def cadastra_cliente():
     clientes[cpf] = [nome, email, status, nascimento]
     sleep(1)
     print("CLIENTE CADASTRADO COM SUCESSO!")
-    print("todos os clientes: ", clientes) #apenas para testes
 
 
 def exibe_cliente():
@@ -164,7 +163,6 @@ def atualiza_cliente():
         clientes[cpf] = [nome, email, status, nascimento]
         sleep(1)
         print("DADOS DO CLIENTE ALTERADOS COM SUCESSO!")
-        print("todos os clientes: ", clientes) #apenas para testes
     else:
         print("CLIENTE NÃO ENCONTRADO")
 
@@ -186,7 +184,6 @@ def deleta_cliente():
             clientes[cpf][2] = False
             sleep(1)
             print("CLIENTE EXCLUIDO COM SUCESSO!")
-            print("todos os clientes: ", clientes) #apenas para testes
         else:
             print("EXCLUSÃO CANCELADA!")
     else:

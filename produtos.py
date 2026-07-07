@@ -151,7 +151,6 @@ def atualiza_produto():
         print("PROCESSANDO ALTERAÇÃO...")
         sleep(1)
         print("DADOS DO PRODUTO ALTERADOS COM SUCESSO!")
-        print("produtos:", produtos) #apenas para testes
     else:
         print("PRODUTO NÃO ENCONTRADO")
 
@@ -171,13 +170,11 @@ def deleta_produto():
         confirma = input("DESEJA MESMO EXCLUIR ESSE PRODUTO? [S/N]: ").upper()
         if confirma == "S":
             print("EXCLUINDO PRODUTO...")
-            print("todos os produtos:", produtos) #testes
             for i in produtos: #testes
                 print(produtos[i])
             produtos[cod_produto][3] = False
             sleep(1)
             print("PRODUTO EXCLUIDO COM SUCESSO!")
-            print("produtos:", produtos) #apenas para testes
         else:
             print("EXCLUSÃO CANCELADA")
     else:

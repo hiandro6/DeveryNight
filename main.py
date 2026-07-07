@@ -32,11 +32,11 @@ load_vendas(ARQUIVO_VENDAS)
 print("BEM VINDO AO DEVERY NIGHT, SEU SISTEMA DE GESTÃO PARA CONVÊNIENCIA")
 op_princ = ""
 while op_princ != "0":
-    """sleep(1)"""
+    sleep(0.5)
     print(menu_principal)
     op_princ = input("DIGITE SUA OPÇÃO: ")
     print("CARREGANDO...")
-    """sleep(1)"""
+    sleep(0.5)
 
 
 
@@ -44,13 +44,12 @@ while op_princ != "0":
     if op_princ == "1":
         op_produto = ""
         while op_produto != "0":
-            """sleep(1)"""
+            sleep(0.5)
             print(menu_produtos)
             op_produto = input("DIGITE SUA OPÇÃO: ")
 
             if op_produto == "1":
                 cadastra_produto()
-                print("produtos: ", produtos) #apenas para teste
 
             elif op_produto == "2":
                 exibe_produto()
@@ -73,7 +72,7 @@ while op_princ != "0":
     elif op_princ == "2":
         op_cliente = ""
         while op_cliente != "0":
-            """sleep(1)"""
+            sleep(0.5)
             print(menu_clientes)
             op_cliente = input("DIGITE SUA OPÇÃO: ")
 
@@ -189,7 +188,7 @@ while op_princ != "0":
         salvar_vendas(ARQUIVO_VENDAS, vendas)
 
         print("ENCERRANDO O SISTEMA...")
-        """sleep(1)"""
+        sleep(0.5)
         print("VOLTE SEMPRE!")
 
     else:
