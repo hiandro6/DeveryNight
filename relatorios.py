@@ -8,8 +8,9 @@ from utilidades import validar_nome, validar_cpf
 def lista_produtos():
     for k , v in produtos.items():
         if v[3]:
-            print(f"| ID: {k} | NOME: {v[0]} | VALOR: {v[1]}R$ | CATEGORIA: {v[2]}")
+            print(f"| ID: {k:6} | NOME: {v[0]:15} | VALOR: {v[1]:6}R$ | CATEGORIA: {v[2]}")
             sleep(0.7)
+    input("PRESSIONE ENTER PARA CONTINUAR... ")
 
 def produtos_da_categoria():
     while True:
@@ -27,11 +28,13 @@ def produtos_da_categoria():
     if existe:
         for k , v in produtos.items():
             if v[3] and v[2] == categoria:
-                print(f"| ID: {k} | NOME: {v[0]} | VALOR: {v[1]}R$ | CATEGORIA: {v[2]}")
+                print(f"| ID: {k:6} | NOME: {v[0]:15} | VALOR: {v[1]:6}R$ | CATEGORIA: {v[2]}")
                 sleep(0.7)
     else:
         print("NÃO ENCONTRAMOS NENHUM PRODUTO DESSA CATEGORIA")    
+    input("PRESSIONE ENTER PARA CONTINUAR... ")
 
+    
 def produtos_valor_especifico():
     while True:
         try:
@@ -52,11 +55,12 @@ def produtos_valor_especifico():
     if existe:
         for k , v in produtos.items():
             if v[3] and (v[1] >= val_min) and (v[1] <= val_max):
-                print(f"| ID: {k} | NOME: {v[0]} | VALOR: {v[1]}R$ | CATEGORIA: {v[2]}")
+                print(f"| ID: {k:6} | NOME: {v[0]:15} | VALOR: {v[1]:6}R$ | CATEGORIA: {v[2]}")
                 sleep(0.7)
     else:
         print("NÃO TEMOS NENHUM PRODUTO DENTRO DESSA FAIXA DE VALOR") 
 
+    input("PRESSIONE ENTER PARA CONTINUAR... ")
 
 def total_produtos_vendidos():
     total_vendas = 0
@@ -68,7 +72,7 @@ def total_produtos_vendidos():
                 total_produtos += produto[1]
     print(f"o total de produtos vendidos nas {total_vendas} vendas realizadas foi {total_produtos}")
 
-
+    input("PRESSIONE ENTER PARA CONTINUAR... ")
 
 
 def lista_clientes():
@@ -76,6 +80,8 @@ def lista_clientes():
         if v[2]:
             print(f"| CPF: {k:16} | NOME: {v[0]:25} | EMAIL: {v[1]:25} | NASCIMENTO: {v[3]}")
             sleep(0.7)
+
+    input("PRESSIONE ENTER PARA CONTINUAR... ")
 
 
 def descobre_idade(nascimento):
@@ -108,6 +114,7 @@ def clientes_idade_especifica():
     if not existe:
         print("NÃO ENCONTRAMOS NENHUM CLIENTE COM ESSA IDADE")
 
+    input("PRESSIONE ENTER PARA CONTINUAR... ")
 
 def clientes_mes_especifico():
     meses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"]
@@ -135,6 +142,7 @@ def clientes_mes_especifico():
     if not existe:
         print("NÃO ENCONTRAMOS NENHUM CLIENTE NASCIDO NESSE MÊS")
 
+    input("PRESSIONE ENTER PARA CONTINUAR... ")
 
 def clientes_prefixo_nome():
     while True:
@@ -156,7 +164,7 @@ def clientes_prefixo_nome():
     if not existe:
         print(f"NÃO ENCONTRAMOS NENHUM CLIENTE CUJO NOME INICIE COM {prefixo} ")
 
-
+    input("PRESSIONE ENTER PARA CONTINUAR... ")
 
 
 def lista_vendas():
@@ -169,6 +177,8 @@ def lista_vendas():
                 print(f" {i[1]}un x {i[0]}")
             sleep(0.7)
 
+    input("PRESSIONE ENTER PARA CONTINUAR... ")
+
 
 def media_valor_vendas():
     valor_total = 0
@@ -179,7 +189,9 @@ def media_valor_vendas():
             valor_total += v[2]
 
     media = valor_total / quantidade
-    print(f"A MÉDIA DE VALOR DAS {quantidade} VENDAS REALIZADAS É DE {media}R$")
+    print(f"A MÉDIA DE VALOR DAS {quantidade} VENDAS REALIZADAS É DE {media:.2f}R$")
+
+    input("PRESSIONE ENTER PARA CONTINUAR... ")
 
 
 def vendas_mes_especifico():
@@ -212,6 +224,7 @@ def vendas_mes_especifico():
     if not existe:
         print(f"NÃO ENCONTRAMOS NENHUMA VENDA REALIZADA NESSE MÊS")
 
+    input("PRESSIONE ENTER PARA CONTINUAR... ")
 
 
 def vendas_cliente_especifico():
@@ -238,6 +251,7 @@ def vendas_cliente_especifico():
     if not existe:
         print(f"NÃO ENCONTRAMOS NENHUMA VENDA REALIZADA POR ESSE CLIENTE")
 
+    input("PRESSIONE ENTER PARA CONTINUAR... ")
 
 menu_relatorios = """
 ============================
